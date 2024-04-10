@@ -6,6 +6,7 @@ import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
@@ -21,13 +22,18 @@ public class Task {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne()
     private User owner;
 
     @Column(length = 30, nullable = false)
-    private Long title;
+    private String title;
+
+    //private boolean finished;
 
     private Date deadline;
+
+    @ManyToOne @JoinColumn(nullable = false)
+    private TaskList taskList;
 
     @Column(nullable = false)
     private Instant createdAt;

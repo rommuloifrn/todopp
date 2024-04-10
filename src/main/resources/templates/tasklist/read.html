@@ -1,0 +1,9 @@
+<h3 th:text="${tasklist.title}"></h3>
+<p th:text="${tasklist.description}"></p>
+<p th:text="${tasklist.createdAt}"></p>
+
+<h6>tasks</h6>
+
+<div th:each="task:${tasks}">
+    <p th:text="${task.title}" />
+</div>

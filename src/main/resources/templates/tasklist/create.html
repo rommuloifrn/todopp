@@ -1,0 +1,17 @@
+<form method="post" th:object="${tasklist}">
+    <div>
+        <p th:if="${tasklist}">Editing <p th:text="${tasklist.title}"></p></p>
+        <label for="title">Title</label> <br>
+        <input th:field="*{title}" id="title" type="text" name="title">
+    </div>
+
+        <input th:field="*{id}" type="number" hidden>
+
+    <div>
+        <label for="description">Description</label> <br>
+        <textarea th:field="*{description}" name="description" id="" cols="30" rows="10"></textarea>
+    </div>
+    
+    <input type="submit" value="Save">
+    
+</form>

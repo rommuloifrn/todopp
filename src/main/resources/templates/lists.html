@@ -7,8 +7,17 @@
 </head>
 <body>
     <h2>Listas:</h2>
-    <div th:each="list:${tasklists}" >
-        <p th:text="${list.title}"></p>
-    </div>
+    <ul>
+        <li th:each="list:${tasklists}" >
+            <a th:href="@{/lists/{id}(id=${list.id})}">
+                <p th:text="${list.title}"></p> 
+            </a>
+            <a th:href="@{lists/delete/{id}(id=${list.id})}"> delete</a>
+            <a th:href="@{lists/edit/{id}(id=${list.id})}">edit</a>
+        </li>
+        <li>
+            <a th:href="@{'/lists/new'}">Add new</a>
+        </li>
+    </ul>
 </body>
 </html>
