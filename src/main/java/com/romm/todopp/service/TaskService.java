@@ -1,0 +1,49 @@
+package com.romm.todopp.service;
+
+import java.time.Instant;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.romm.todopp.DTO.TaskDTO;
+import com.romm.todopp.entity.Task;
+import com.romm.todopp.entity.User;
+import com.romm.todopp.repository.TaskListRepository;
+import com.romm.todopp.repository.TaskRepository;
+import com.romm.todopp.repository.UserRepository;
+
+@Service
+public class TaskService {
+    
+    @Autowired TaskRepository taskRepository;
+    @Autowired UserRepository userRepository;
+    @Autowired TaskListRepository taskListRepository;
+
+    public void create(Task task, Long taskListId) {
+        task.setCreatedAt(Instant.now());
+        task.setTaskList(taskListRepository.findById(taskListId).get());
+        User defaultUser = userRepository.findById(Long.valueOf(1)).get();
+        task.setOwner(defaultUser);
+
+        taskRepository.save(task);
+    }
+
+    public void update(TaskDTO data, Long id) {
+        Task task = taskRepository.findById(id).get();
+        if (data.title() != null) task.setTitle(data.title());
+        taskRepository.save(task);
+    }
+
+    public Long delete(Long id) { 
+        Task task = taskRepository.findById(id).get();
+        Long listId = task.getTaskList().getId();
+        taskRepository.delete(task);
+        return listId; // retorna taskListId pra poder redirecionar pra a página da lista
+    }
+
+    public List<Task> findFromTaskList(Long id) {
+        //return taskListRepository.findById(id).get().getTasks();
+        return taskRepository.findAllByTaskListId(id);
+    }
+}

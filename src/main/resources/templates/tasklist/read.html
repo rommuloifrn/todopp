@@ -5,5 +5,15 @@
 <h6>tasks</h6>
 
 <div th:each="task:${tasks}">
-    <p th:text="${task.title}" />
+    <span th:text="${task.title}"></span> - <span th:text="${task.finished}"></span>
+    <form method="post" th:action="@{/task/delete/{id}(id=${task.id})}" style="display:inline;">
+        <input type="submit" value="delete">
+    </form>
+</div>
+
+<div>
+    <form th:action="@{/task/create/{id}(id=${tasklist.id})}" method="post">
+        <input type="text" name="title" id="" placeholder="title">
+        <input type="submit" value="add">
+    </form>
 </div>

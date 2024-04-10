@@ -10,4 +10,6 @@ import com.romm.todopp.entity.Task;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
     public List<Task> findAllByTaskListId(Long id);
+
+    public void deleteAllByTaskListId(Long id);
 }

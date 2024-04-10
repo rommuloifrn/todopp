@@ -1,7 +1,6 @@
 package com.romm.todopp.entity;
 
 import java.time.Instant;
-import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,16 +27,11 @@ public class Task {
     @Column(length = 30, nullable = false)
     private String title;
 
-    //private boolean finished;
-
-    private Date deadline;
+    private boolean finished;
 
     @ManyToOne @JoinColumn(nullable = false)
     private TaskList taskList;
 
     @Column(nullable = false)
     private Instant createdAt;
-
-    @Column(columnDefinition = "boolean default false")
-    private boolean isPublic;
 }
