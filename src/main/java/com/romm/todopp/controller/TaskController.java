@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
+
 @Controller @RequestMapping("/task")
 public class TaskController {
 
@@ -26,5 +27,11 @@ public class TaskController {
     public String delete(@PathVariable Long id) {
         return "redirect:/lists/" + taskService.delete(id);
     }
+
+    @PostMapping("/finish/{id}")
+    public String finish(@PathVariable Long id) {
+        return "redirect:/lists/" + taskService.toggleFinish(id);
+    }
+    
     
 }

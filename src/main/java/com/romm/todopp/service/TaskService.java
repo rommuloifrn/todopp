@@ -45,10 +45,11 @@ public class TaskService {
         return listId; // retorna taskListId pra poder redirecionar pra a página da lista
     }
 
-    public void toggleFinish(Long id) throws ResponseStatusException {
+    public Long toggleFinish(Long id) throws ResponseStatusException {
         Task task = findOr404(id);
         task.setFinished(!task.isFinished());
         taskRepository.save(task);
+        return task.getTaskList().getId(); // retorna id da tasklist pra ser usado no redirect
     }
 
     public List<Task> findFromTaskList(Long id) {

@@ -4,11 +4,11 @@
 
 <h6>tasks</h6>
 
-<div th:each="task:${tasks}">
-    <span th:text="${task.title}"></span> - <span th:text="${task.finished}"></span>
-    <form method="post" th:action="@{/task/delete/{id}(id=${task.id})}" style="display:inline;">
-        <input type="submit" value="delete">
-    </form>
+<div th:each="task:${tasks}"> <!-- cada task -->
+    <span th:text="${task.title}"></span> &#40<span th:text="${task.finished}"></span>&#41 
+
+    <form method="post" th:action="@{/task/finish/{id}(id=${task.id})}" style="display:inline;"> <input type="submit" value="finish"> </form>
+    <form method="post" th:action="@{/task/delete/{id}(id=${task.id})}" style="display:inline;"> <input type="submit" value="delete"> </form>
 </div>
 
 <div>
