@@ -1,6 +1,8 @@
 package com.romm.todopp.service;
 
 import java.time.Instant;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -9,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.romm.todopp.DTO.TaskListReadDTO;
 import com.romm.todopp.DTO.TaskListUpdateDTO;
+import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.repository.TaskListRepository;
 import com.romm.todopp.repository.TaskRepository;
@@ -33,7 +37,6 @@ public class TaskListService {
 
     public TaskList read(Long id) throws ResponseStatusException {
         TaskList taskList = findOr404(id);
-
         return taskList;
     }
 
@@ -45,11 +48,31 @@ public class TaskListService {
 
         taskListRepository.save(taskList);
     }
+
     @Transactional // depois estudar as formas de fazer cascateamento... Não sei direito o que isso aqui faz, mas resolve meu problema.
     public void delete(Long id) throws ResponseStatusException {
         TaskList taskList = findOr404(id);
         taskRepository.deleteAllByTaskList(taskList);
         taskListRepository.delete(taskList);
+    }
+
+    public String getProgress(TaskList taskList, boolean showByPercentage) {
+        Iterator<Task> tasksIterator = taskRepository.findAllByTaskListId(taskList.getId()).iterator();
+        int taskCount = 0, finishedCount = 0; Task actual;
+
+        while (tasksIterator.hasNext()) {
+            actual = tasksIterator.next();
+            taskCount++;
+            if (actual.isFinished()) finishedCount++;
+        }
+        
+        if (taskCount == 0) return "no tasks";
+        if (showByPercentage) return String.format("%.0f%%", (float) 100*finishedCount/taskCount);
+        else return String.format("%d/%d", finishedCount, taskCount);
+    }
+
+    public String getProgress(TaskList taskList) {
+        return getProgress(taskList, false);
     }
 
     private TaskList findOr404(Long id) {

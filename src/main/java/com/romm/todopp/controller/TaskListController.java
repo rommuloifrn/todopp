@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.romm.todopp.DTO.TaskListReadDTO;
 import com.romm.todopp.DTO.TaskListUpdateDTO;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
@@ -50,8 +51,10 @@ public class TaskListController {
     @GetMapping("/{id}")
     public ModelAndView read(@PathVariable Long id) throws ResponseStatusException {
         TaskList taskList = taskListService.read(id);
+        TaskListReadDTO data = new TaskListReadDTO(taskList.getId(), taskList.getTitle(), taskList.getDescription(), taskList.getOwner().getUsername(), taskList.isPublic(), taskList.getDeadline(), taskList.getCreatedAt(), taskListService.getProgress(taskList));
+
         List<Task> tasks = taskService.findFromTaskList(id);
-        return new ModelAndView("tasklist/read", Map.of("tasklist", taskList, "tasks", tasks));
+        return new ModelAndView("tasklist/read", Map.of("tasklist", data, "tasks", tasks));
     }
 
     @GetMapping("/edit/{id}") // isso aqui não, por isso nao da pra pegar a taskList direto nos parametros
