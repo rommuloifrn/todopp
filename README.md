@@ -4,7 +4,7 @@ Powerful todo-list making.
 
 ## Goals
 
-- [ ] TaskList CRUD
-- [ ] Task CRUD
+- [x] TaskList CRUD
+- [x] Task CRUD
 - [ ] Authentication handling
 - [ ] Invite & participation implementation
