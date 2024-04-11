@@ -31,18 +31,14 @@ public class TaskListService {
         taskListRepository.save(taskList);
     }
 
-    public TaskList read(Long id) {
-        Optional<TaskList> opt = taskListRepository.findById(id);
-        if (opt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        TaskList taskList = opt.get();
+    public TaskList read(Long id) throws ResponseStatusException {
+        TaskList taskList = findOr404(id);
 
         return taskList;
     }
 
-    public void edit(TaskListDTO data, Long id) {
-        Optional<TaskList> opt = taskListRepository.findById(id);
-        if (opt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        TaskList taskList = opt.get();
+    public void edit(TaskListDTO data, Long id) throws ResponseStatusException {
+        TaskList taskList = findOr404(id);
         
         if (data.title() != null) taskList.setTitle(data.title());
         if (data.description() != null) taskList.setDescription(data.description());
@@ -50,8 +46,15 @@ public class TaskListService {
         taskListRepository.save(taskList);
     }
     @Transactional // depois estudar as formas de fazer cascateamento... Não sei direito o que isso aqui faz, mas resolve meu problema.
-    public void delete(Long id) {
-        taskRepository.deleteAllByTaskListId(id);
-        taskListRepository.deleteById(id);
+    public void delete(Long id) throws ResponseStatusException {
+        TaskList taskList = findOr404(id);
+        taskRepository.deleteAllByTaskList(taskList);
+        taskListRepository.delete(taskList);
+    }
+
+    private TaskList findOr404(Long id) {
+        Optional<TaskList> opt = taskListRepository.findById(id);
+        if (opt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        else return opt.get();
     }
 }

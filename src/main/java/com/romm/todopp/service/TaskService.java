@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -33,13 +32,13 @@ public class TaskService {
         taskRepository.save(task);
     }
 
-    public void update(TaskDTO data, Long id) {
+    public void update(TaskDTO data, Long id) throws ResponseStatusException {
         Task task = findOr404(id);
         if (data.title() != null) task.setTitle(data.title());
         taskRepository.save(task);
     }
 
-    public Long delete(Long id) { 
+    public Long delete(Long id) throws ResponseStatusException { 
         Task task = findOr404(id);
         Long listId = task.getTaskList().getId();
         taskRepository.delete(task);
