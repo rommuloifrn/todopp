@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.romm.todopp.DTO.TaskListDTO;
+import com.romm.todopp.DTO.TaskListUpdateDTO;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.repository.TaskListRepository;
@@ -61,7 +61,7 @@ public class TaskListController {
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(TaskListDTO data, @PathVariable Long id) throws ResponseStatusException {
+    public String edit(TaskListUpdateDTO data, @PathVariable Long id) throws ResponseStatusException {
         taskListService.edit(data, id);
         return "redirect:/lists";
     }

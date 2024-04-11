@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.romm.todopp.DTO.TaskListDTO;
+import com.romm.todopp.DTO.TaskListUpdateDTO;
 import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.repository.TaskListRepository;
 import com.romm.todopp.repository.TaskRepository;
@@ -37,7 +37,7 @@ public class TaskListService {
         return taskList;
     }
 
-    public void edit(TaskListDTO data, Long id) throws ResponseStatusException {
+    public void edit(TaskListUpdateDTO data, Long id) throws ResponseStatusException {
         TaskList taskList = findOr404(id);
         
         if (data.title() != null) taskList.setTitle(data.title());
