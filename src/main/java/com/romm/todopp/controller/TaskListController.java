@@ -51,8 +51,8 @@ public class TaskListController {
     @GetMapping("/{id}")
     public ModelAndView read(@PathVariable Long id) throws ResponseStatusException {
         TaskList taskList = taskListService.read(id);
-        TaskListReadDTO data = new TaskListReadDTO(taskList.getId(), taskList.getTitle(), taskList.getDescription(), taskList.getOwner().getUsername(), taskList.isPublic(), taskList.getDeadline(), taskList.getCreatedAt(), taskListService.getProgress(taskList), taskList.getTasks(), taskList.getLinks());
-        return new ModelAndView("tasklist/read_links", Map.of("tasklist", data));
+        TaskListReadDTO data = new TaskListReadDTO(taskList.getId(), taskList.getTitle(), taskList.getDescription(), taskList.getOwner().getUsername(), taskList.isPublic(), taskList.getDeadline(), taskList.getCreatedAt(), taskListService.getProgress(taskList), taskList.getLinks());
+        return new ModelAndView("tasklist/read", Map.of("tasklist", data));
     }
 
     @GetMapping("/edit/{id}") // isso aqui não, por isso nao da pra pegar a taskList direto nos parametros

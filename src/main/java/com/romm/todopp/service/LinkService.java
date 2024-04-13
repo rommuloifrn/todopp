@@ -12,8 +12,11 @@ import com.romm.todopp.repository.LinkRepository;
 public class LinkService {
     
     @Autowired LinkRepository linkRepository;
+    @Autowired TaskListService taskListService;
+    @Autowired TaskService taskService;
 
-    public Link create(Task task, TaskList taskList) {
+    public Link create(Task task, Long taskListId) {
+        TaskList taskList = taskListService.read(taskListId);
         Link link = new Link();
         link.setTask(task);
         link.setTaskList(taskList);
@@ -23,8 +26,18 @@ public class LinkService {
     }
 
     public Link delete(Link link) {
+        Task task = link.getTask();
         linkRepository.delete(link);
         return link;
+    }
+
+    public void deleteAndCheckOrphan(Link link) {
+        Task task = link.getTask();
+        if (task.getLinks().size()==1) {
+            taskService.delete(task.getId());
+            
+        }
+        taskService.delete(task.getId());
     }
 
     public void positionUp(Link link) {
@@ -41,7 +54,7 @@ public class LinkService {
 
     public void positionDown(Link link) {
         int linkPosition = link.getTaskListPosition();
-        int taskListSize = link.getTaskList().getTasks().size();
+        int taskListSize = link.getTaskList().getLinks().size();
         if (linkPosition<taskListSize-1) {
             Link linkBelow = link.getTaskList().getLinks().get(linkPosition+1);
             linkBelow.setTaskListPosition(linkPosition);

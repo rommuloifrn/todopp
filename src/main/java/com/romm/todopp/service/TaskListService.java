@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.romm.todopp.DTO.TaskListUpdateDTO;
+import com.romm.todopp.entity.Link;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.repository.TaskListRepository;
-import com.romm.todopp.repository.TaskRepository;
 import com.romm.todopp.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -23,11 +23,11 @@ import jakarta.transaction.Transactional;
 public class TaskListService {
 
     @Autowired TaskListRepository taskListRepository;
-    @Autowired TaskRepository taskRepository;
+    @Autowired TaskService taskService;
     @Autowired UserRepository userRepository;
 
     public void create(TaskList taskList) {
-        Long ownerId = new Random().nextLong(1, 4);
+        Long ownerId = new Random().nextLong(1, 2);
         taskList.setCreatedAt(Instant.now());
         taskList.setOwner(userRepository.findById(ownerId).get());
         taskListRepository.save(taskList);
@@ -50,15 +50,18 @@ public class TaskListService {
     @Transactional // depois estudar as formas de fazer cascateamento... Não sei direito o que isso aqui faz, mas resolve meu problema.
     public void delete(Long id) throws ResponseStatusException {
         TaskList taskList = findOr404(id);
+        taskList.getLinks().forEach((Link link) -> { // caso a task só tenha um link, deleta ela junto.
+            taskService.deleteIfSingleLink(link.getTask());
+        });
         taskListRepository.delete(taskList);
     }
 
     public String getProgress(TaskList taskList, boolean showByPercentage) {
-        Iterator<Task> tasksIterator = taskList.getTasks().iterator();
+        Iterator<Link> linksIterator = taskList.getLinks().iterator();
         int taskCount = 0, finishedCount = 0; Task actual;
 
-        while (tasksIterator.hasNext()) {
-            actual = tasksIterator.next();
+        while (linksIterator.hasNext()) {
+            actual = linksIterator.next().getTask();
             taskCount++;
             if (actual.isFinished()) finishedCount++;
         }

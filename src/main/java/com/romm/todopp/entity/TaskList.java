@@ -36,8 +36,8 @@ public class TaskList {
 
     private Date deadline;
 
-    @OneToMany(mappedBy = "taskList", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Task> tasks;
+    // @OneToMany(mappedBy = "taskList", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    // private List<Task> tasks;
 
     @Column(nullable = false)
     private Instant createdAt;

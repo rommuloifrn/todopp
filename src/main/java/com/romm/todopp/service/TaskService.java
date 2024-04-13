@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.romm.todopp.DTO.TaskDTO;
+import com.romm.todopp.entity.Link;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.User;
 import com.romm.todopp.repository.TaskRepository;
@@ -20,17 +21,14 @@ public class TaskService {
     
     @Autowired TaskRepository taskRepository;
     @Autowired UserRepository userRepository;
-    @Autowired TaskListService taskListService;
 
-    public void create(Task task, Long taskListId) {
+    public Task create(Task task, Long taskListId) {
         task.setCreatedAt(Instant.now());
-        task.setTaskList(taskListService.read(taskListId));
         User defaultUser = userRepository.findById(Long.valueOf(1)).get();
         task.setOwner(defaultUser);
-
-        taskRepository.save(task);
+        return taskRepository.save(task);
     }
-
+    //refatorar isso aqui pra receber a Task direto depois...
     public void update(TaskDTO data, Long id) throws ResponseStatusException {
         Task task = findOr404(id);
         if (data.title() != null) task.setTitle(data.title());
@@ -43,15 +41,15 @@ public class TaskService {
         return task;
     }
 
+    public void deleteIfSingleLink(Task task) {
+        if (task.getLinks().size()==1) delete(task.getId());
+    }
+
     public Task toggleFinish(Long id) throws ResponseStatusException {
         Task task = findOr404(id);
         task.setFinished(!task.isFinished());
         taskRepository.save(task);
         return task;
-    }
-
-    public List<Task> findFromTaskList(Long id) {
-        return taskListService.read(id).getTasks();
     }
 
     private Task findOr404(Long id) {

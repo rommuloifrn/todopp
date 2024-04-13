@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.romm.todopp.entity.Link;
-import com.romm.todopp.entity.Task;
 
 public record TaskListReadDTO(
     Long id,
@@ -16,7 +15,6 @@ public record TaskListReadDTO(
     Date deadline,
     Instant createdAt,
     String progress,
-    List<Task> tasks,
     List<Link> links
     ) {
     

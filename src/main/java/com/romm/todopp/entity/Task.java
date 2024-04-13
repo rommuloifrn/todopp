@@ -25,19 +25,19 @@ public class Task {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne()
-    private User owner;
-
     @Column(length = 30, nullable = false)
     private String title;
 
     private boolean finished;
 
-    // @ManyToOne @JoinColumn(nullable = false)
-    // private TaskList taskList;
-
     @Column(nullable = false)
     private Instant createdAt;
+
+    @ManyToOne()
+    private User owner;
+
+    // @ManyToOne @JoinColumn(nullable = false)
+    // private TaskList taskList;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Link> links;
