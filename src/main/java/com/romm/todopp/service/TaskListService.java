@@ -50,12 +50,11 @@ public class TaskListService {
     @Transactional // depois estudar as formas de fazer cascateamento... Não sei direito o que isso aqui faz, mas resolve meu problema.
     public void delete(Long id) throws ResponseStatusException {
         TaskList taskList = findOr404(id);
-        taskRepository.deleteAllByTaskList(taskList);
         taskListRepository.delete(taskList);
     }
 
     public String getProgress(TaskList taskList, boolean showByPercentage) {
-        Iterator<Task> tasksIterator = taskRepository.findAllByTaskListId(taskList.getId()).iterator();
+        Iterator<Task> tasksIterator = taskList.getTasks().iterator();
         int taskCount = 0, finishedCount = 0; Task actual;
 
         while (tasksIterator.hasNext()) {

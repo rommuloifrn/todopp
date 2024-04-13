@@ -2,6 +2,9 @@ package com.romm.todopp.DTO;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
+
+import com.romm.todopp.entity.Task;
 
 public record TaskListReadDTO(
     Long id,
@@ -11,7 +14,8 @@ public record TaskListReadDTO(
     boolean isPublic,
     Date deadline,
     Instant createdAt,
-    String progress
+    String progress,
+    List<Task> tasks
     ) {
     
 }

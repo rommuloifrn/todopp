@@ -12,7 +12,6 @@ import org.springframework.web.server.ResponseStatusException;
 import com.romm.todopp.DTO.TaskDTO;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.User;
-import com.romm.todopp.repository.TaskListRepository;
 import com.romm.todopp.repository.TaskRepository;
 import com.romm.todopp.repository.UserRepository;
 
@@ -21,11 +20,11 @@ public class TaskService {
     
     @Autowired TaskRepository taskRepository;
     @Autowired UserRepository userRepository;
-    @Autowired TaskListRepository taskListRepository;
+    @Autowired TaskListService taskListService;
 
     public void create(Task task, Long taskListId) {
         task.setCreatedAt(Instant.now());
-        task.setTaskList(taskListRepository.findById(taskListId).get());
+        task.setTaskList(taskListService.read(taskListId));
         User defaultUser = userRepository.findById(Long.valueOf(1)).get();
         task.setOwner(defaultUser);
 
@@ -38,23 +37,21 @@ public class TaskService {
         taskRepository.save(task);
     }
 
-    public Long delete(Long id) throws ResponseStatusException { 
+    public Task delete(Long id) throws ResponseStatusException { 
         Task task = findOr404(id);
-        Long listId = task.getTaskList().getId();
         taskRepository.delete(task);
-        return listId; // retorna taskListId pra poder redirecionar pra a página da lista
+        return task;
     }
 
-    public Long toggleFinish(Long id) throws ResponseStatusException {
+    public Task toggleFinish(Long id) throws ResponseStatusException {
         Task task = findOr404(id);
         task.setFinished(!task.isFinished());
         taskRepository.save(task);
-        return task.getTaskList().getId(); // retorna id da tasklist pra ser usado no redirect
+        return task;
     }
 
     public List<Task> findFromTaskList(Long id) {
-        //return taskListRepository.findById(id).get().getTasks();
-        return taskRepository.findAllByTaskListId(id);
+        return taskListService.read(id).getTasks();
     }
 
     private Task findOr404(Long id) {
