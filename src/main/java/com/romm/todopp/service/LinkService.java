@@ -26,7 +26,6 @@ public class LinkService {
     }
 
     public Link delete(Link link) {
-        Task task = link.getTask();
         linkRepository.delete(link);
         return link;
     }

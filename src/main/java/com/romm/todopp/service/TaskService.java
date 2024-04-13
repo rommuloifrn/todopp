@@ -1,7 +1,6 @@
 package com.romm.todopp.service;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.romm.todopp.DTO.TaskDTO;
-import com.romm.todopp.entity.Link;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.User;
 import com.romm.todopp.repository.TaskRepository;
