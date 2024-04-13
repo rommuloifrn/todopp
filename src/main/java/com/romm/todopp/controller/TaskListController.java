@@ -1,6 +1,5 @@
 package com.romm.todopp.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.romm.todopp.DTO.TaskListReadDTO;
 import com.romm.todopp.DTO.TaskListUpdateDTO;
-import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.repository.TaskListRepository;
 import com.romm.todopp.service.TaskListService;
