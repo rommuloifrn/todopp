@@ -2,7 +2,6 @@ package com.romm.todopp.service;
 
 import java.time.Instant;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.romm.todopp.DTO.TaskListReadDTO;
 import com.romm.todopp.DTO.TaskListUpdateDTO;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
