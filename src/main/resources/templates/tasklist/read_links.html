@@ -1,0 +1,21 @@
+<h3 th:text="|${tasklist.title} ${tasklist.progress}"></h3>
+<p th:text="${tasklist.description}"></p>
+<p th:text="${tasklist.createdAt}"></p>
+
+<h6>tasks</h6>
+
+<div th:each="link:${tasklist.links}"> <!-- cada task -->
+    <th:block th:each="task:${link.task}">
+        <span th:text="${task.title}"></span> &#40<span th:text="${task.finished}"></span>&#41 
+
+        <form method="post" th:action="@{/task/finish/{id}(id=${task.id})}" style="display:inline;"> <input type="submit" value="finish"> </form>
+        <form method="post" th:action="@{/task/delete/{id}(id=${task.id})}" style="display:inline;"> <input type="submit" value="delete"> </form>
+    </th:block>
+</div>
+
+<div>
+    <form th:action="@{/task/create/{id}(id=${tasklist.id})}" method="post">
+        <input type="text" name="title" id="" placeholder="title">
+        <input type="submit" value="add">
+    </form>
+</div>

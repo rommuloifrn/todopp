@@ -44,4 +44,7 @@ public class TaskList {
 
     @Column(columnDefinition = "boolean default false")
     private boolean isPublic;
+
+    @OneToMany(mappedBy = "taskList", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Link> links;
 }
