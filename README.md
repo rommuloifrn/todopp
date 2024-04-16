@@ -6,5 +6,7 @@ Powerful todo-list making.
 
 - [x] TaskList CRUD
 - [x] Task CRUD
+- [x] Task position changing
+- [ ] Task sharing between lists (check duplicated links)
 - [ ] Authentication handling
 - [ ] Invite & participation implementation
