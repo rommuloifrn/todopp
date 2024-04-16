@@ -44,7 +44,7 @@ public class LinkService {
         return link;
     }
 
-    public void deleteAndCheckOrphan(Link link) {
+    public void deleteAndCheckIfTaskIfOrphan(Link link) {
         Task task = link.getTask();
         if (task.getLinks().size()==1) {
             taskService.delete(task.getId());
@@ -54,7 +54,7 @@ public class LinkService {
 
     public void unlink(Long taskId, Long taskListId) throws ResponseStatusException {
         Link link = findOr404(taskListId, taskId);
-        deleteAndCheckOrphan(link);
+        deleteAndCheckIfTaskIfOrphan(link);
     }
 
     public List<Link> getFromTaskList(TaskList taskList) {
