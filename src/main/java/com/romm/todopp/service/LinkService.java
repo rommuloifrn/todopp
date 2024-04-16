@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.romm.todopp.entity.Link;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
+import com.romm.todopp.exceptions.AlreadyLinkedException;
 import com.romm.todopp.repository.LinkRepository;
 
 @Service
@@ -21,6 +22,8 @@ public class LinkService {
     @Autowired TaskService taskService;
 
     public Link create(Task task, Long taskListId) {
+        if (alreadyExists(taskListId, task.getId())) throw new AlreadyLinkedException("A link between those already exists.", null);
+
         TaskList taskList = taskListService.read(taskListId);
         Link link = new Link();
         link.setTask(task);
@@ -52,6 +55,8 @@ public class LinkService {
         delete(link);
     }
 
+
+    
     public void unlink(Long taskId, Long taskListId) throws ResponseStatusException {
         Link link = findOr404(taskListId, taskId);
         deleteAndCheckIfTaskIfOrphan(link);
@@ -88,6 +93,10 @@ public class LinkService {
             linkRepository.save(link);
             linkRepository.save(linkBelow);
         }
+    }
+
+    public boolean alreadyExists(Long taskListId, Long taskId) {
+        return !linkRepository.findByTaskListIdAndTaskId(taskListId, taskId).isEmpty();
     }
 
     public Link findOr404(Long id) {
