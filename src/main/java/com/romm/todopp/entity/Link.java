@@ -22,6 +22,6 @@ public class Link {
 
     @ManyToOne
     private TaskList taskList;
-
+    // será que depois da pra deixar @Unique? pq nao tem nada diretamente impedindo que dois links tenham a mesma posição numa lista.
     private int taskListPosition;
 }

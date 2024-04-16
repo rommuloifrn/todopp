@@ -25,7 +25,12 @@ public class LinkService {
         Link link = new Link();
         link.setTask(task);
         link.setTaskList(taskList);
-        link.setTaskListPosition(taskList.getLinks().size());
+
+        int listSize = taskList.getLinks().size();
+        int position = 0;
+        if (listSize > 0)
+            position = getFromTaskList(taskList).get( listSize-1 ).getTaskListPosition()+1;
+        link.setTaskListPosition(position);
 
         return linkRepository.save(link);
     }
@@ -52,10 +57,13 @@ public class LinkService {
         return linkRepository.findAllByTaskListOrderByTaskListPosition(taskList);
     }
 
-    public void positionUp(Link link) {
+    public void positionUp(Link link) throws ResponseStatusException {
         int linkPosition = link.getTaskListPosition();
-        if (linkPosition>0){
-            Link linkAbove = getFromTaskList(link.getTaskList()).get(linkPosition-1);
+
+        Link firstOfTheTaskList = getFromTaskList(link.getTaskList()).get(0);
+        boolean linkPassedIsFirst = (link == firstOfTheTaskList);
+        if (!linkPassedIsFirst){
+            Link linkAbove = findOr404(link.getTaskList(), linkPosition-1);
             linkAbove.setTaskListPosition(linkPosition);
             link.setTaskListPosition(linkPosition-1);
 
@@ -64,11 +72,12 @@ public class LinkService {
         }
     }
 
-    public void positionDown(Link link) {
+    public void positionDown(Link link) throws ResponseStatusException {
         int linkPosition = link.getTaskListPosition();
-        int taskListSize = link.getTaskList().getLinks().size();
-        if (linkPosition<taskListSize-1) {
-            Link linkBelow = getFromTaskList(link.getTaskList()).get(linkPosition+1);
+
+        boolean linkPassedIsLast = linkRepository.findByTaskListAndTaskListPosition(link.getTaskList(), linkPosition+1).isEmpty();
+        if (!linkPassedIsLast) {
+            Link linkBelow = findOr404(link.getTaskList(), linkPosition+1);
             linkBelow.setTaskListPosition(linkPosition);
             link.setTaskListPosition(linkPosition+1);
 
@@ -79,6 +88,12 @@ public class LinkService {
 
     public Link findOr404(Long id) {
         Optional <Link> opt = linkRepository.findById(id);
+        if (opt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        return opt.get();
+    }
+
+    public Link findOr404(TaskList taskList, int taskListPosition) {
+        Optional <Link> opt = linkRepository.findByTaskListAndTaskListPosition(taskList, taskListPosition);
         if (opt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return opt.get();
     }
