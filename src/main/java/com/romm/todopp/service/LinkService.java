@@ -48,9 +48,13 @@ public class LinkService {
         Task task = link.getTask();
         if (task.getLinks().size()==1) {
             taskService.delete(task.getId());
-            
         }
-        taskService.delete(task.getId());
+        delete(link);
+    }
+
+    public void unlink(Long taskId, Long taskListId) throws ResponseStatusException {
+        Link link = findOr404(taskListId, taskId);
+        deleteAndCheckOrphan(link);
     }
 
     public List<Link> getFromTaskList(TaskList taskList) {
@@ -88,6 +92,12 @@ public class LinkService {
 
     public Link findOr404(Long id) {
         Optional <Link> opt = linkRepository.findById(id);
+        if (opt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        return opt.get();
+    }
+
+    public Link findOr404(Long taskListId, Long taskId) {
+        Optional <Link> opt = linkRepository.findByTaskListIdAndTaskId(taskListId, taskId);
         if (opt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return opt.get();
     }

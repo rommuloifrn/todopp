@@ -14,4 +14,6 @@ public interface LinkRepository extends JpaRepository<Link, Long> {
     public List<Link> findAllByTaskListOrderByTaskListPosition(TaskList taskList);
 
     public Optional<Link> findByTaskListAndTaskListPosition(TaskList taskList, int taskListPosition);
+
+    public Optional<Link> findByTaskListIdAndTaskId(Long taskListId, Long taskId);
 }

@@ -37,5 +37,12 @@ public class LinkController {
         
         return "redirect:/lists/" + originTaskListId;
     }
+
+    @PostMapping("/{taskId}/unlink-of/{taskListId}")
+    public String unlink(@PathVariable Long taskId, @PathVariable Long taskListId) {
+        linkService.unlink(taskId, taskListId);
+        
+        return "redirect:/lists/" + taskListId;
+    }
     
 }
