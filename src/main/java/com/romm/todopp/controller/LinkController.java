@@ -31,7 +31,7 @@ public class LinkController {
     }
 
     @PostMapping("/{taskId}/to/{taskListId}/backto/{originTaskListId}")
-    public String makeLink(@PathVariable Long taskId, @PathVariable Long taskListId, @PathVariable Long originTaskListId) {
+    public String linkTask(@PathVariable Long taskId, @PathVariable Long taskListId, @PathVariable Long originTaskListId) {
         Task task = taskService.read(taskId);
         linkService.create(task, taskListId);
         
