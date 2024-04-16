@@ -26,6 +26,12 @@ public class TaskService {
         task.setOwner(defaultUser);
         return taskRepository.save(task);
     }
+
+    public Task read(Long id) throws ResponseStatusException {
+        Task task = findOr404(id);
+        return task;
+    }
+
     //refatorar isso aqui pra receber a Task direto depois...
     public void update(TaskDTO data, Long id) throws ResponseStatusException {
         Task task = findOr404(id);

@@ -6,7 +6,10 @@
 
 <div th:each="link:${tasklist.links}"> <!-- cada task -->
     <th:block th:each="task:${link.task}">
-        <span th:text="${task.title}"></span> &#40<span th:text="${task.finished}"></span>&#41 
+        <span th:text="${task.title}"></span> &#40<span th:text="${task.finished}"></span>&#41 pos: <span th:text="${link.taskListPosition}"></span>
+
+        <form method="post" th:action="@{/task/up/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${link.id})}" style="display:inline;"> <input type="submit" value="climb"> </form>    
+        <form method="post" th:action="@{/task/down/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${link.id})}" style="display:inline;"> <input type="submit" value="down"> </form>    
 
         <form method="post" th:action="@{/task/finish/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${task.id})}" style="display:inline;"> <input type="submit" value="finish"> </form>
         <form method="post" th:action="@{/task/delete/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${task.id})}" style="display:inline;"> <input type="submit" value="delete"> </form>

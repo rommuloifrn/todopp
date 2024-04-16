@@ -5,12 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.romm.todopp.entity.Link;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.service.LinkService;
 import com.romm.todopp.service.TaskService;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 
 
 
@@ -38,6 +40,23 @@ public class TaskController {
         taskService.toggleFinish(id);
         return "redirect:/lists/" + taskListId;
     }
+
+    @PostMapping("/up/{linkId}/backto/{taskListId}")
+    public String upTask(@PathVariable Long linkId, @PathVariable Long taskListId) throws ResponseStatusException {
+        Link link = linkService.read(linkId);
+        linkService.positionUp(link);
+        
+        return "redirect:/lists/" + taskListId;
+    }
+
+    @PostMapping("/down/{linkId}/backto/{taskListId}")
+    public String downTask(@PathVariable Long linkId, @PathVariable Long taskListId) throws ResponseStatusException {
+        Link link = linkService.read(linkId);
+        linkService.positionDown(link);
+        
+        return "redirect:/lists/" + taskListId;
+    }
+    
     
     
 }

@@ -12,6 +12,7 @@ import com.romm.todopp.DTO.TaskListReadDTO;
 import com.romm.todopp.DTO.TaskListUpdateDTO;
 import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.repository.TaskListRepository;
+import com.romm.todopp.service.LinkService;
 import com.romm.todopp.service.TaskListService;
 import com.romm.todopp.service.TaskService;
 
@@ -29,6 +30,7 @@ public class TaskListController {
     @Autowired TaskListRepository taskListRepository;
     @Autowired TaskService taskService;
     @Autowired TaskListService taskListService;
+    @Autowired LinkService linkService;
 
     @GetMapping("")
     public ModelAndView lists() {
@@ -49,7 +51,7 @@ public class TaskListController {
     @GetMapping("/{id}")
     public ModelAndView read(@PathVariable Long id) throws ResponseStatusException {
         TaskList taskList = taskListService.read(id);
-        TaskListReadDTO data = new TaskListReadDTO(taskList.getId(), taskList.getTitle(), taskList.getDescription(), taskList.getOwner().getUsername(), taskList.isPublic(), taskList.getDeadline(), taskList.getCreatedAt(), taskListService.getProgress(taskList), taskList.getLinks());
+        TaskListReadDTO data = new TaskListReadDTO(taskList.getId(), taskList.getTitle(), taskList.getDescription(), taskList.getOwner().getUsername(), taskList.isPublic(), taskList.getDeadline(), taskList.getCreatedAt(), taskListService.getProgress(taskList), linkService.getFromTaskList(taskList));
         return new ModelAndView("tasklist/read", Map.of("tasklist", data));
     }
 
