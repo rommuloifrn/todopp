@@ -2,6 +2,7 @@ package com.romm.todopp.service;
 
 import java.time.Instant;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -54,6 +55,10 @@ public class TaskListService {
             taskService.deleteIfSingleLink(link.getTask());
         });
         taskListRepository.delete(taskList);
+    }
+
+    public List<TaskList> findAll() {
+        return taskListRepository.findAll();
     }
 
     public String getProgress(TaskList taskList, boolean showByPercentage) {

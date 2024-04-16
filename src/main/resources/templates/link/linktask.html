@@ -1,0 +1,9 @@
+<h2>Listas</h2>
+
+<ul>
+    <li th:each="taskList:${taskLists}">
+        <form method="post" th:action="@{/link/{taskId}/to/{taskListId}/backto/{originTaskListId}(taskId=${taskId}, taskListId=${taskList.id}, originTaskListId=${originTaskListId})}">
+            <button type="submit" th:text="${taskList.title}"></button>
+        </form>
+    </li>
+</ul>
