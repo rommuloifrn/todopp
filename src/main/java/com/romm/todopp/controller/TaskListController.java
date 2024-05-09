@@ -2,6 +2,8 @@ package com.romm.todopp.controller;
 
 import java.util.Map;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +35,8 @@ public class TaskListController {
     @Autowired LinkService linkService;
 
     @GetMapping("")
-    public ModelAndView lists() {
-        return new ModelAndView("lists", Map.of("tasklists", taskListRepository.findAll()));
+    public ModelAndView lists(Principal principal) {
+        return new ModelAndView("lists", Map.of("tasklists", taskListRepository.findAll(), "principal", principal));
     }
 
     @GetMapping("/new")
