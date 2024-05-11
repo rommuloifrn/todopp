@@ -1,22 +1,13 @@
 # todo++
 
-Literally an app that i implement whatever i can think of that would improve the use of todo-lists. 
+Make to-do lists that share tasks, track your progress in long and short-term goals.
 
-Currently, those things are:
-
-- Task sharing between lists
-- List sharing between users
-- List composition with other lists
-- List progress visualization 
+![](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white) ![](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
 ## Current goals
 
-- [x] TaskList CRUD
-- [x] Task CRUD
-- [x] Task position changing
-- [x] Task sharing between lists (checking duplicated links)
-- [ ] User registration
-- [ ] User login
-- [ ] List/task authentication processing
+- [X] TaskList & Task CRUDs
+- [X] Task sharing between lists
+- [ ] User auth
 - [ ] Invite & participation implementation
 - [ ] Styling with Tailwindcss
