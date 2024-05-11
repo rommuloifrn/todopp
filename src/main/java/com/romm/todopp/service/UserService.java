@@ -10,7 +10,7 @@ import java.util.Optional;
 import com.romm.todopp.entity.User;
 import com.romm.todopp.repository.UserRepository;
 
-public class MyUserDetailsService implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
     @Autowired UserRepository userRepository;
 
