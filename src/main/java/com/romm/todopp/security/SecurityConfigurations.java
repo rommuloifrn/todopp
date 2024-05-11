@@ -23,7 +23,7 @@ public class SecurityConfigurations {
         httpSecurity.authorizeHttpRequests(authorize -> authorize
         .requestMatchers("/").permitAll()
         .requestMatchers("/auth/register").permitAll()
-        .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
+        .requestMatchers("/h2-console/**").permitAll()
         .requestMatchers("/h2-database/**").permitAll()
         
         .anyRequest().authenticated()

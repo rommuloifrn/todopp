@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,13 +21,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Table(name = "tb_task_list") @Entity @NoArgsConstructor @Setter @Getter @ToString
+@Table(name = "tb_task_list") @Entity @NoArgsConstructor @Setter @Getter
 public class TaskList {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne @JoinColumn(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Nonnull
     private User owner;
 
     @Column(nullable = false)
@@ -45,6 +47,10 @@ public class TaskList {
     @Column(columnDefinition = "boolean default false")
     private boolean isPublic;
 
-    @OneToMany(mappedBy = "taskList", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "taskList", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Link> links;
+
+    public String toString() {
+        return this.title;
+    }
 }

@@ -1,6 +1,7 @@
 package com.romm.todopp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,11 @@ public class AuthenticationService {
         user.setPassword(password);
 
         return userRepository.save(user);
+    }
+
+    public User getPrincipal() {
+        var principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var user = userRepository.findById(principal.getId()).get();
+        return user;
     }
 }

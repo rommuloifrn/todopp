@@ -8,6 +8,7 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -15,6 +16,7 @@ import com.romm.todopp.DTO.TaskListUpdateDTO;
 import com.romm.todopp.entity.Link;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
+import com.romm.todopp.entity.User;
 import com.romm.todopp.repository.TaskListRepository;
 import com.romm.todopp.repository.UserRepository;
 
@@ -24,11 +26,13 @@ import jakarta.transaction.Transactional;
 public class TaskListService {
 
     @Autowired TaskListRepository taskListRepository;
+
     @Autowired TaskService taskService;
     @Autowired UserRepository userRepository;
+    @Autowired AuthenticationService authenticationService;
 
     public void create(TaskList taskList) {
-        Long ownerId = new Random().nextLong(1, 2);
+        Long ownerId = authenticationService.getPrincipal().getId();
         taskList.setCreatedAt(Instant.now());
         taskList.setOwner(userRepository.findById(ownerId).get());
         taskListRepository.save(taskList);
@@ -58,7 +62,9 @@ public class TaskListService {
     }
 
     public List<TaskList> findAll() {
-        return taskListRepository.findAll();
+        User user = authenticationService.getPrincipal();
+
+        return user.getTaskLists();
     }
 
     public String getProgress(TaskList taskList, boolean showByPercentage) {

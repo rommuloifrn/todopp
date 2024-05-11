@@ -14,6 +14,7 @@ import com.romm.todopp.DTO.TaskListReadDTO;
 import com.romm.todopp.DTO.TaskListUpdateDTO;
 import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.repository.TaskListRepository;
+import com.romm.todopp.service.AuthenticationService;
 import com.romm.todopp.service.LinkService;
 import com.romm.todopp.service.TaskListService;
 import com.romm.todopp.service.TaskService;
@@ -33,10 +34,11 @@ public class TaskListController {
     @Autowired TaskService taskService;
     @Autowired TaskListService taskListService;
     @Autowired LinkService linkService;
+    @Autowired AuthenticationService authenticationService;
 
     @GetMapping("")
     public ModelAndView lists(Principal principal) {
-        return new ModelAndView("lists", Map.of("tasklists", taskListRepository.findAll(), "principal", principal));
+        return new ModelAndView("lists", Map.of("principal", authenticationService.getPrincipal()));
     }
 
     @GetMapping("/new")

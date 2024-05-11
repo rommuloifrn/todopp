@@ -1,4 +1,4 @@
-<form method="post" th:object="${tasklist}">
+<form method="post" th:action="@{'/lists/new'}" th:object="${tasklist}">
     <div>
         <p th:if="${tasklist.id}">Editing <span th:text="${tasklist.title}"></span></p>
         <label for="title">Title</label> <br>
@@ -6,6 +6,8 @@
     </div>
 
         <input th:field="*{id}" type="number" hidden>
+
+        
 
     <div>
         <label for="description">Description</label> <br>

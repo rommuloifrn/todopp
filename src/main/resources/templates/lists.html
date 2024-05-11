@@ -6,10 +6,10 @@
     <title>Lists</title>
 </head>
 <body>
-    Olá, <span th:text="${principal.name}"></span>!
+    Olá, <span th:text="${principal}"></span>!
     <h2>Listas:</h2>
     <ul>
-        <li th:each="list:${tasklists}" >
+        <li th:each="list:${principal.taskLists}" >
             <a th:href="@{/lists/{id}(id=${list.id})}">
                 <p th:text="${list.title}"></p> 
             </a>
