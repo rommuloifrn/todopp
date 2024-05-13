@@ -7,7 +7,19 @@
 </head>
 <body>
     <h1>Hi!</h1>
-    <a th:href="@{'/lists'}">lists</a>
-    <a th:href="@{'/auth/register'}">register</a>
+    <div sec:authorize="isAuthenticated()">
+        <a th:href="@{'/lists'}">lists</a>
+        <form method="post" th:action="@{'/auth/logout'}">
+            <input type="submit" value="logout">
+        </form>
+    </div>
+    
+    <div sec:authorize="!isAuthenticated()">
+        <a th:href="@{'/auth/login'}">login</a>
+        <a th:href="@{'/auth/register'}">register</a>
+    </div>
+    
+    
+    
 </body>
 </html>

@@ -1,0 +1,11 @@
+<h1>Login</h1>
+
+<form th:action="@{'/auth/login'}" method="post">
+    <label>Username
+        <input type="text" name="username" id="" autofocus>
+    </label> <br>
+    <label>Password
+        <input type="password" name="password" id="">
+    </label>
+    <input type="submit" value="Login">
+</form>

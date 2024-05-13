@@ -15,6 +15,8 @@ public class AuthenticationService {
     
     @Autowired UserRepository userRepository;
 
+    //@Autowired UserService userService;
+
     @Autowired BCryptPasswordEncoder passwordEncoder;
 
     public User register(RegistrationDTO data) {
@@ -32,6 +34,20 @@ public class AuthenticationService {
 
         return userRepository.save(user);
     }
+
+    // public UserDetails login(LoginDTO data) throws UsernameNotFoundException {
+    //     UserDetails principal = userService.loadUserByUsername(data.username());
+
+        
+    //     if (!passwordEncoder.matches(data.password(), principal.getPassword()))
+    //         return null;
+
+    //     Authentication authentication = new UsernamePasswordAuthenticationToken(principal, principal.getPassword(), principal.getAuthorities());
+    //     SecurityContext context = SecurityContextHolder.getContext();
+    //     context.setAuthentication(authentication);
+    //     System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA\n aaaaaaaaaaaaaaaaaaaaaaaaaaaa\n aaaaaaaaaaaaaaaaaa \n AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    //     return principal;
+    // }
 
     public User getPrincipal() {
         var principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
