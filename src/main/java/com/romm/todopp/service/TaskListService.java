@@ -87,8 +87,8 @@ public class TaskListService {
         return getProgress(taskList, false);
     }
 
-    private TaskList getAsUser(Long id) throws ResponseStatusException {
-        var taskList = findOr404(id);
+    private TaskList getAsUser(Long taskListId) throws ResponseStatusException {
+        var taskList = findOr404(taskListId);
         authorizationService.requestUserIsOwnerOrError(taskList);
         return taskList;
     }
