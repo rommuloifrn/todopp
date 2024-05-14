@@ -1,13 +1,11 @@
 package com.romm.todopp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.romm.todopp.DTO.LoginDTO;
 import com.romm.todopp.DTO.RegistrationDTO;
 import com.romm.todopp.exceptions.UsernameAlreadyExistsException;
 import com.romm.todopp.service.AuthenticationService;
