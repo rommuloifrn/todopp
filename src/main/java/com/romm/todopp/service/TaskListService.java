@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,6 +29,7 @@ public class TaskListService {
     @Autowired TaskService taskService;
     @Autowired UserRepository userRepository;
     @Autowired AuthenticationService authenticationService;
+    @Autowired AuthorizationService authorizationService;
 
     public void create(TaskList taskList) {
         Long ownerId = authenticationService.getPrincipal().getId();
@@ -37,12 +39,12 @@ public class TaskListService {
     }
 
     public TaskList read(Long id) throws ResponseStatusException {
-        TaskList taskList = findOr404(id);
+        TaskList taskList = getAsUser(id);
         return taskList;
     }
 
     public void edit(TaskListUpdateDTO data, Long id) throws ResponseStatusException {
-        TaskList taskList = findOr404(id);
+        TaskList taskList = getAsUser(id);
         
         if (data.title() != null) taskList.setTitle(data.title());
         if (data.description() != null) taskList.setDescription(data.description());
@@ -52,7 +54,8 @@ public class TaskListService {
 
     @Transactional // depois estudar as formas de fazer cascateamento... Não sei direito o que isso aqui faz, mas resolve meu problema.
     public void delete(Long id) throws ResponseStatusException {
-        TaskList taskList = findOr404(id);
+        TaskList taskList = getAsUser(id);
+
         taskList.getLinks().forEach((Link link) -> { // caso a task só tenha um link, deleta ela junto.
             taskService.deleteIfSingleLink(link.getTask());
         });
@@ -82,6 +85,12 @@ public class TaskListService {
 
     public String getProgress(TaskList taskList) {
         return getProgress(taskList, false);
+    }
+
+    private TaskList getAsUser(Long id) throws ResponseStatusException {
+        var taskList = findOr404(id);
+        authorizationService.requestUserIsOwnerOrError(taskList);
+        return taskList;
     }
 
     private TaskList findOr404(Long id) {

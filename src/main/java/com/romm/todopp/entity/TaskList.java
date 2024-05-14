@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
+import com.romm.todopp.security.Ownable;
+
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -20,7 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Table(name = "tb_task_list") @Entity @NoArgsConstructor @Setter @Getter
-public class TaskList {
+public class TaskList extends Ownable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
