@@ -25,8 +25,10 @@ public class SecurityConfigurations {
         
         .anyRequest().authenticated()
         )
-        .formLogin(
-            formLogin -> formLogin.loginPage("/auth/login").loginProcessingUrl("/auth/login")
+        .formLogin(formLogin -> formLogin
+            .loginPage("/auth/login")
+            .loginProcessingUrl("/auth/login")
+            .failureUrl("/auth/login-error")
         )
         .logout(
             logout -> logout.logoutUrl("/auth/logout")

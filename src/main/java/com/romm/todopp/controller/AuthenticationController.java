@@ -2,6 +2,7 @@ package com.romm.todopp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.romm.todopp.DTO.RegistrationDTO;
 import com.romm.todopp.exceptions.UsernameAlreadyExistsException;
 import com.romm.todopp.service.AuthenticationService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -36,6 +39,13 @@ public class AuthenticationController {
     public String login() {
         return "auth/login";
     }
+    
+    @GetMapping("/login-error")
+    public String login(Model model) {
+        model.addAttribute("loginError", true);
+        return "auth/login";
+    }
+    
 
     // @PostMapping("/login")
     // public String login(LoginDTO data) throws UsernameNotFoundException, RuntimeException { // estudar depois
