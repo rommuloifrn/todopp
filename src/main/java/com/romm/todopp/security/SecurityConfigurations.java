@@ -29,6 +29,7 @@ public class SecurityConfigurations {
             .loginPage("/auth/login")
             .loginProcessingUrl("/auth/login")
             .failureUrl("/auth/login-error")
+            //.failureForwardUrl(null)
         )
         .logout(
             logout -> logout.logoutUrl("/auth/logout")

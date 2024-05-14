@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.romm.todopp.DTO.RegistrationDTO;
 import com.romm.todopp.exceptions.UsernameAlreadyExistsException;
 import com.romm.todopp.service.AuthenticationService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
