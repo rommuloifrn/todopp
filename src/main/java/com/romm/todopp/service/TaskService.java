@@ -9,20 +9,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.romm.todopp.DTO.TaskDTO;
+import com.romm.todopp.entity.Link;
 import com.romm.todopp.entity.Task;
+import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.repository.TaskRepository;
 
 @Service
 public class TaskService {
     
     @Autowired TaskRepository taskRepository;
+
+    @Autowired LinkService linkService;
     @Autowired AuthenticationService authenticationService;
     @Autowired AuthorizationService authorizationService;
 
-    public Task create(Task task, Long taskListId) {
+    public Task create(Task task, TaskList taskList) {
         task.setCreatedAt(Instant.now());
         task.setOwner(authenticationService.getPrincipal());
-        return taskRepository.save(task);
+
+        task = taskRepository.save(task);
+        linkService.create(task, taskList);
+        return task;
     }
 
     public Task read(Long id) throws ResponseStatusException {
@@ -43,7 +50,22 @@ public class TaskService {
         return task;
     }
 
-    public void deleteIfSingleLink(Task task) {
+    public Link unlink(Long taskId, Long taskListId) {
+        var link = linkService.findOr404(taskListId, taskId);
+        linkService.delete(link);
+
+        var task = accessAsUser(taskId);
+        if (task.getLinks().size()==0) {
+            delete(task.getId());
+        }
+        
+
+        return link;
+    }
+
+    // auxiliares
+
+    public void deleteIfSingleLink(Task task) { // usado no delete de tasklists (nao ha conexao direta entre task e lista)
         if (task.getLinks().size()==1) delete(task.getId());
     }
 

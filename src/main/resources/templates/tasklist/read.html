@@ -13,8 +13,8 @@
 
         <form method="post" th:action="@{/task/finish/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${task.id})}" style="display:inline;"> <input type="submit" value="finish"> </form>
         <form method="post" th:action="@{/task/delete/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${task.id})}" style="display:inline;"> <input type="submit" value="delete"> </form>
-        <form method="post" th:action="@{/link/{id}/unlink-of/{tasklistid}(id=${task.id}, tasklistid=${tasklist.id})}" style="display:inline;"> <input type="submit" value="unlink"> </form>
-        <a th:href="@{/link/{id}/backto/{tasklistid}(id=${task.id}, tasklistid=${tasklist.id})}">link to another list</a>
+        <form method="post" th:action="@{/task/{id}/unlink-of/{tasklistid}(id=${task.id}, tasklistid=${tasklist.id})}" style="display:inline;"> <input type="submit" value="unlink"> </form>
+        <a th:href="@{/task/link/{id}/backto/{tasklistid}(id=${task.id}, tasklistid=${tasklist.id})}">link to another list</a>
     </th:block>
 </div>
 
