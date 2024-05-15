@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.romm.todopp.DTO.TaskListReadDTO;
 import com.romm.todopp.DTO.TaskListUpdateDTO;
 import com.romm.todopp.entity.TaskList;
-import com.romm.todopp.repository.TaskListRepository;
 import com.romm.todopp.service.AuthenticationService;
 import com.romm.todopp.service.LinkService;
 import com.romm.todopp.service.TaskListService;
@@ -30,7 +29,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/lists")
 public class TaskListController {
 
-    @Autowired TaskListRepository taskListRepository;
     @Autowired TaskService taskService;
     @Autowired TaskListService taskListService;
     @Autowired LinkService linkService;
