@@ -16,7 +16,6 @@ import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.entity.User;
 import com.romm.todopp.repository.TaskListRepository;
-import com.romm.todopp.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -26,14 +25,12 @@ public class TaskListService {
     @Autowired TaskListRepository taskListRepository;
 
     @Autowired TaskService taskService;
-    @Autowired UserRepository userRepository;
     @Autowired AuthenticationService authenticationService;
     @Autowired AuthorizationService authorizationService;
 
     public void create(TaskList taskList) {
-        Long ownerId = authenticationService.getPrincipal().getId();
         taskList.setCreatedAt(Instant.now());
-        taskList.setOwner(userRepository.findById(ownerId).get());
+        taskList.setOwner(authenticationService.getPrincipal());
         taskListRepository.save(taskList);
     }
 

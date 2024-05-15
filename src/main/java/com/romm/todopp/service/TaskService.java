@@ -11,13 +11,11 @@ import org.springframework.web.server.ResponseStatusException;
 import com.romm.todopp.DTO.TaskDTO;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.repository.TaskRepository;
-import com.romm.todopp.repository.UserRepository;
 
 @Service
 public class TaskService {
     
     @Autowired TaskRepository taskRepository;
-    @Autowired UserRepository userRepository;
     @Autowired AuthenticationService authenticationService;
     @Autowired AuthorizationService authorizationService;
 

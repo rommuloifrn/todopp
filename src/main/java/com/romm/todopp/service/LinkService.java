@@ -42,9 +42,9 @@ public class LinkService {
         return findOr404(id);
     }
 
-    public Link delete(Link link) {
-        linkRepository.delete(link);
-        return link;
+    public void unlink(Long taskId, Long taskListId) throws ResponseStatusException {
+        Link link = findOr404(taskListId, taskId);
+        deleteAndCheckIfTaskIfOrphan(link);
     }
 
     public void deleteAndCheckIfTaskIfOrphan(Link link) {
@@ -55,11 +55,9 @@ public class LinkService {
         delete(link);
     }
 
-
-    
-    public void unlink(Long taskId, Long taskListId) throws ResponseStatusException {
-        Link link = findOr404(taskListId, taskId);
-        deleteAndCheckIfTaskIfOrphan(link);
+    public Link delete(Link link) {
+        linkRepository.delete(link);
+        return link;
     }
 
     public List<Link> getFromTaskList(TaskList taskList) {
