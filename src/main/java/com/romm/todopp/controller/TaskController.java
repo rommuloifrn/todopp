@@ -82,7 +82,9 @@ public class TaskController {
     
     @PostMapping("/{taskId}/unlink-of/{taskListId}")
     public String unlink(@PathVariable Long taskId, @PathVariable Long taskListId) {
-        taskService.unlink(taskId, taskListId);
+        var task = taskService.read(taskId);
+        var taskList = taskListService.read(taskListId);
+        taskService.unlink(task, taskList);
         
         return "redirect:/lists/" + taskListId;
     }

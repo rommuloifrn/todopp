@@ -50,11 +50,11 @@ public class TaskService {
         return task;
     }
 
-    public Link unlink(Long taskId, Long taskListId) {
-        var link = linkService.findOr404(taskListId, taskId);
+    public Link unlink(Task task, TaskList taskList) {
+        var link = linkService.findOr404(taskList, task);
         linkService.delete(link);
 
-        var task = accessAsUser(taskId);
+        //var task = accessAsUser(taskId);
         if (task.getLinks().size()==0) {
             delete(task.getId());
         }

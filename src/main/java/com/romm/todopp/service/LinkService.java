@@ -93,6 +93,12 @@ public class LinkService {
         return opt.get();
     }
 
+    public Link findOr404(TaskList taskList, Task task) {
+        Optional <Link> opt = linkRepository.findByTaskListAndTask(taskList, task);
+        if (opt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        return opt.get();
+    }
+
     public Link findOr404(TaskList taskList, int taskListPosition) {
         Optional <Link> opt = linkRepository.findByTaskListAndTaskListPosition(taskList, taskListPosition);
         if (opt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
