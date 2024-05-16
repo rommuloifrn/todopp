@@ -8,7 +8,7 @@ Make to-do lists that share tasks, track your progress in long and short-term go
 
 - [X] TaskList & Task CRUDs
 - [X] Task sharing between lists
-- [ ] User authentication/authorization
+- [X] User authentication/authorization
 - [ ] Tasklist composition
 - [ ] Tasklist invite & participation
 - [ ] Styling with Tailwindcss
