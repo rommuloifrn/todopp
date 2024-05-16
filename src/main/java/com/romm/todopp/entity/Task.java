@@ -3,6 +3,8 @@ package com.romm.todopp.entity;
 import java.time.Instant;
 import java.util.List;
 
+import com.romm.todopp.security.Ownable;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +21,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Table(name = "tb_task") @Entity @NoArgsConstructor @Setter @Getter @ToString
-public class Task {
+public class Task extends Ownable {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

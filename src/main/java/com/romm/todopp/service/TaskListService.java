@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +14,8 @@ import com.romm.todopp.DTO.TaskListUpdateDTO;
 import com.romm.todopp.entity.Link;
 import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
+import com.romm.todopp.entity.User;
 import com.romm.todopp.repository.TaskListRepository;
-import com.romm.todopp.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -24,23 +23,24 @@ import jakarta.transaction.Transactional;
 public class TaskListService {
 
     @Autowired TaskListRepository taskListRepository;
+
     @Autowired TaskService taskService;
-    @Autowired UserRepository userRepository;
+    @Autowired AuthenticationService authenticationService;
+    @Autowired AuthorizationService authorizationService;
 
     public void create(TaskList taskList) {
-        Long ownerId = new Random().nextLong(1, 2);
         taskList.setCreatedAt(Instant.now());
-        taskList.setOwner(userRepository.findById(ownerId).get());
+        taskList.setOwner(authenticationService.getPrincipal());
         taskListRepository.save(taskList);
     }
 
     public TaskList read(Long id) throws ResponseStatusException {
-        TaskList taskList = findOr404(id);
+        TaskList taskList = getAsUser(id);
         return taskList;
     }
 
     public void edit(TaskListUpdateDTO data, Long id) throws ResponseStatusException {
-        TaskList taskList = findOr404(id);
+        TaskList taskList = getAsUser(id);
         
         if (data.title() != null) taskList.setTitle(data.title());
         if (data.description() != null) taskList.setDescription(data.description());
@@ -50,7 +50,8 @@ public class TaskListService {
 
     @Transactional // depois estudar as formas de fazer cascateamento... Não sei direito o que isso aqui faz, mas resolve meu problema.
     public void delete(Long id) throws ResponseStatusException {
-        TaskList taskList = findOr404(id);
+        TaskList taskList = getAsUser(id);
+
         taskList.getLinks().forEach((Link link) -> { // caso a task só tenha um link, deleta ela junto.
             taskService.deleteIfSingleLink(link.getTask());
         });
@@ -58,7 +59,9 @@ public class TaskListService {
     }
 
     public List<TaskList> findAll() {
-        return taskListRepository.findAll();
+        User user = authenticationService.getPrincipal();
+
+        return user.getTaskLists();
     }
 
     public String getProgress(TaskList taskList, boolean showByPercentage) {
@@ -78,6 +81,12 @@ public class TaskListService {
 
     public String getProgress(TaskList taskList) {
         return getProgress(taskList, false);
+    }
+
+    private TaskList getAsUser(Long taskListId) throws ResponseStatusException {
+        var taskList = findOr404(taskListId);
+        authorizationService.requestUserIsOwnerOrError(taskList);
+        return taskList;
     }
 
     private TaskList findOr404(Long id) {

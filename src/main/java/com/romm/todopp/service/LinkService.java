@@ -18,13 +18,10 @@ import com.romm.todopp.repository.LinkRepository;
 public class LinkService {
     
     @Autowired LinkRepository linkRepository;
-    @Autowired TaskListService taskListService;
-    @Autowired TaskService taskService;
 
-    public Link create(Task task, Long taskListId) {
-        if (alreadyExists(taskListId, task.getId())) throw new AlreadyLinkedException("A link between those already exists.", null);
+    public Link create(Task task, TaskList taskList) {
+        if (alreadyExists(taskList.getId(), task.getId())) throw new AlreadyLinkedException("A link between those already exists.", null);
 
-        TaskList taskList = taskListService.read(taskListId);
         Link link = new Link();
         link.setTask(task);
         link.setTaskList(taskList);
@@ -45,21 +42,6 @@ public class LinkService {
     public Link delete(Link link) {
         linkRepository.delete(link);
         return link;
-    }
-
-    public void deleteAndCheckIfTaskIfOrphan(Link link) {
-        Task task = link.getTask();
-        if (task.getLinks().size()==1) {
-            taskService.delete(task.getId());
-        }
-        delete(link);
-    }
-
-
-    
-    public void unlink(Long taskId, Long taskListId) throws ResponseStatusException {
-        Link link = findOr404(taskListId, taskId);
-        deleteAndCheckIfTaskIfOrphan(link);
     }
 
     public List<Link> getFromTaskList(TaskList taskList) {
@@ -107,6 +89,12 @@ public class LinkService {
 
     public Link findOr404(Long taskListId, Long taskId) {
         Optional <Link> opt = linkRepository.findByTaskListIdAndTaskId(taskListId, taskId);
+        if (opt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        return opt.get();
+    }
+
+    public Link findOr404(TaskList taskList, Task task) {
+        Optional <Link> opt = linkRepository.findByTaskListAndTask(taskList, task);
         if (opt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return opt.get();
     }
