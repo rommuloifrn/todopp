@@ -7,6 +7,7 @@ import java.util.List;
 import com.romm.todopp.security.Ownable;
 
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,6 +47,12 @@ public class TaskList extends Ownable {
 
     @Column(columnDefinition = "boolean default false")
     private boolean isPublic;
+
+    @ManyToOne @Nullable
+    private TaskList parent;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<TaskList> childs;
 
     @OneToMany(mappedBy = "taskList", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Link> links;

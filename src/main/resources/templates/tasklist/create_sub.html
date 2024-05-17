@@ -1,11 +1,16 @@
-<form method="post" th:action="@{'/lists/new'}" th:object="${tasklist}">
-    <input th:field="*{id}" type="number" hidden>
+<form method="post" th:action="@{/lists/new-sublist-on/{parentId}(parentId=${parent.id})}" th:object="${tasklist}">
+    <div>
+        Creating a sublist in <span th:text="${parent.title}"></span>
+    </div>
 
     <div>
         <p th:if="${tasklist.id}">Editing <span th:text="${tasklist.title}"></span></p> 
         <label for="title">Title</label> <br>
         <input th:field="*{title}" id="title" type="text" name="title">
     </div>
+
+    <!--<input th:field="*{id}" type="number" hidden>  pra poder enviar direto o objeto (no editar lista) -->
+
     <div>
         <label for="description">Description</label> <br>
         <textarea th:field="*{description}" name="description" id="" cols="30" rows="10"></textarea>

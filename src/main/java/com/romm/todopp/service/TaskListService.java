@@ -34,6 +34,13 @@ public class TaskListService {
         taskListRepository.save(taskList);
     }
 
+    public void create(TaskList taskList, Long parentId) {
+        var parent = getAsUser(parentId);
+        taskList.setParent(parent);
+
+        create(taskList);
+    }
+
     public TaskList read(Long id) throws ResponseStatusException {
         TaskList taskList = getAsUser(id);
         return taskList;
