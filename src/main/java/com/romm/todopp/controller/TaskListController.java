@@ -1,11 +1,15 @@
 package com.romm.todopp.controller;
 
-import java.util.Map;
-
 import java.security.Principal;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,10 +21,6 @@ import com.romm.todopp.service.AuthenticationService;
 import com.romm.todopp.service.LinkService;
 import com.romm.todopp.service.TaskListService;
 import com.romm.todopp.service.TaskService;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -36,7 +36,12 @@ public class TaskListController {
 
     @GetMapping("")
     public ModelAndView lists(Principal principal) {
-        return new ModelAndView("lists", Map.of("principal", authenticationService.getPrincipal()));
+        var requestingUser = authenticationService.getPrincipal();
+        var listsProgresses = new ArrayList<String>();
+        requestingUser.getTaskLists().forEach(list -> {
+            listsProgresses.add(taskListService.getProgress(list));
+        });
+        return new ModelAndView("lists", Map.of("principal", requestingUser, "progresses", listsProgresses));
     }
 
     @GetMapping("/new")
@@ -50,10 +55,26 @@ public class TaskListController {
         return new String("redirect:/lists");
     }
 
+    @GetMapping("/new-sublist-on/{parentId}")
+    public ModelAndView createSublist(@PathVariable Long parentId) {
+        var parent = taskListService.read(parentId);
+        return new ModelAndView("tasklist/create_sub", Map.of("parent", parent, "tasklist", new TaskList()));
+    }
+
+    @PostMapping("/new-sublist-on/{parentId}")
+    public String createSublist(@PathVariable Long parentId, TaskList taskList) {
+        taskListService.create(taskList, parentId);
+
+        return "redirect:/lists/"+parentId;
+    }
+
     @GetMapping("/{id}")
     public ModelAndView read(@PathVariable Long id) throws ResponseStatusException {
         TaskList taskList = taskListService.read(id);
-        TaskListReadDTO data = new TaskListReadDTO(taskList.getId(), taskList.getTitle(), taskList.getDescription(), taskList.getOwner().getUsername(), taskList.isPublic(), taskList.getDeadline(), taskList.getCreatedAt(), taskListService.getProgress(taskList), linkService.getFromTaskList(taskList));
+        var progresses = new ArrayList<String>();
+        taskList.getChilds().forEach((sublist)->progresses.add(taskListService.getProgress(sublist)));
+
+        TaskListReadDTO data = new TaskListReadDTO(taskList.getId(), taskList.getTitle(), taskList.getDescription(), taskList.getOwner().getUsername(), taskList.isPublic(), taskList.getDeadline(), taskList.getCreatedAt(), taskListService.getProgress(taskList), linkService.getFromTaskList(taskList), taskList.getChilds(), progresses);
         return new ModelAndView("tasklist/read", Map.of("tasklist", data));
     }
 

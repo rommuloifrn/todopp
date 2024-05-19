@@ -1,7 +1,7 @@
 <h3 th:text="|${tasklist.title} ${tasklist.progress}"></h3>
 <p th:text="${tasklist.description}"></p>
 <p th:text="${tasklist.createdAt}"></p>
-
+<a th:href="@{/lists/new-sublist-on/{id}(id=${tasklist.id})}">Add sublist</a>
 <h6>tasks</h6>
 
 <div th:each="link:${tasklist.links}"> <!-- cada task -->
@@ -23,4 +23,11 @@
         <input type="text" name="title" id="" placeholder="title">
         <input type="submit" value="add">
     </form>
+</div>
+
+<h6>sublistas</h6>
+<div th:each="sublist, stats:${tasklist.childs}">
+        <a th:href="@{/lists/{id}(id=${sublist.id})}">
+            <span th:text="${sublist.title}"></span> - <span th:text="${tasklist.progresses[stats.index]}"></span>
+        </a>
 </div>
