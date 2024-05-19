@@ -26,8 +26,8 @@
 </div>
 
 <h6>sublistas</h6>
-<div th:each="sublist:${tasklist.childs}">
-    <a th:href="@{/lists/{id}(id=${sublist.id})}">
-        <p th:text="${sublist.title}"></p>
-    </a>
+<div th:each="sublist, stats:${tasklist.childs}">
+        <a th:href="@{/lists/{id}(id=${sublist.id})}">
+            <span th:text="${sublist.title}"></span> - <span th:text="${tasklist.progresses[stats.index]}"></span>
+        </a>
 </div>

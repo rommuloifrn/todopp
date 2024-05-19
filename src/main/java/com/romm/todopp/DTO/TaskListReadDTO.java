@@ -17,7 +17,8 @@ public record TaskListReadDTO(
     Instant createdAt,
     String progress,
     List<Link> links,
-    List<TaskList> childs
+    List<TaskList> childs,
+    List<String> progresses
     ) {
     
 }

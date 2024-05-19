@@ -71,16 +71,35 @@ public class TaskListService {
         return user.getTaskLists();
     }
 
+    private boolean isFinished(TaskList taskList) {
+        var links = taskList.getLinks();
+        if (links.isEmpty() && taskList.getChilds().isEmpty()) return false;
+        for (var link : links) {
+            if (!link.getTask().isFinished()) return false;
+        }
+        for (var sublist : taskList.getChilds())
+            return isFinished(sublist);
+        return true;
+    }
+
     public String getProgress(TaskList taskList, boolean showByPercentage) {
         Iterator<Link> linksIterator = taskList.getLinks().iterator();
-        int taskCount = 0, finishedCount = 0; Task actual;
+        int taskCount = 0, finishedCount = 0;
 
         while (linksIterator.hasNext()) {
-            actual = linksIterator.next().getTask();
+            var actual = linksIterator.next().getTask();
             taskCount++;
             if (actual.isFinished()) finishedCount++;
         }
         
+        Iterator<TaskList> listsIterator = taskList.getChilds().iterator();
+
+        while (listsIterator.hasNext()) {
+            var actual = listsIterator.next();
+            taskCount++;
+            if (isFinished(actual)) finishedCount++;
+        }
+
         if (taskCount == 0) return "no tasks";
         if (showByPercentage) return String.format("%.0f%%", (float) 100*finishedCount/taskCount);
         else return String.format("%d/%d", finishedCount, taskCount);
