@@ -71,7 +71,7 @@ public class TaskListService {
         return user.getTaskLists();
     }
 
-    private boolean isFinished(TaskList taskList) {
+    public boolean isFinished(TaskList taskList) {
         var links = taskList.getLinks();
         if (links.isEmpty() && taskList.getChilds().isEmpty()) return false;
         for (var link : links) {

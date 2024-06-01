@@ -1,25 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{main}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lists</title>
 </head>
-<body>
-    <a th:href="@{'/'}">home</a>
-    Olá, <span th:text="${principal}"></span>!
-    <h2>Listas:</h2>
-    <ul>
-        <li th:each="list, stats:${principal.taskLists}" >
-            <a th:href="@{/lists/{id}(id=${list.id})}">
-                <span th:text="${list.title}"></span> - <span th:text="${progresses[stats.index]}"></span>
-            </a>
-            <a th:href="@{lists/delete/{id}(id=${list.id})}"> delete</a>
-            <a th:href="@{lists/edit/{id}(id=${list.id})}">edit</a>
-        </li>
-        <li>
-            <a th:href="@{'/lists/new'}">Add new</a>
-        </li>
-    </ul>
+<body >
+    
+        <a th:href="@{'/'}">home</a>
+        
+        <main  layout:fragment="content">
+            <div class="mainpanel">
+                <div class="flex justify-between mb-10">
+                    <div class="text-2xl font-medium">My lists:</div>
+                    <div class="text-2xl font-semibold">
+                        &#64<span th:text="${principal.username}"></span>
+                    </div>
+                </div>
+                
+                
+                <div id="tasklists">
+                    <a th:each="list, stats:${principal.taskLists}" th:href="@{/lists/{id}(id=${list.id})}">
+                        <div class="tasklist">
+                            
+                                <div th:text="${list.title}"></div>
+                                <div th:text="${progresses[stats.index]}"></div>
+                            
+                            <!--
+                                <a th:href="@{lists/delete/{id}(id=${list.id})}"> delete</a>
+                                <a th:href="@{lists/edit/{id}(id=${list.id})}">edit</a>
+                            -->
+                        </div>
+                    </a>
+                    
+                    <a th:href="@{'/lists/new'}"
+                    class="add-new"> 
+                        <div class="flex justify-center items-center">
+                            <img th:src="@{icons/add.svg}" alt=""> Add&nbspnew
+                        </div>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </main>
+        
+    
+    
+    
 </body>
 </html>

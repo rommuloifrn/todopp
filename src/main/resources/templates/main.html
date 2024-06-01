@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title layout:tfragment="title">Document</title>
+    <title layout:fragment="title">Document</title>
     <link th:href="@{/main.css}" rel="stylesheet" />
 </head>
-<body>
-    <div th:replace="~{topbar :: topbar}"></div>
-    <div layout:fragment="content"></div>
+<body class="dark:bg-floor-dark dark:text-speech-dark">
+    <a href="/lists">lists</a>
+    <main  layout:fragment="content"></main>
 </body>
 </html>

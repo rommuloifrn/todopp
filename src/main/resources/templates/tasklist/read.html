@@ -1,33 +1,134 @@
-<h3 th:text="|${tasklist.title} ${tasklist.progress}"></h3>
-<p th:text="${tasklist.description}"></p>
-<p th:text="${tasklist.createdAt}"></p>
-<a th:href="@{/lists/new-sublist-on/{id}(id=${tasklist.id})}">Add sublist</a>
-<h6>tasks</h6>
+<!DOCTYPE html>
+<html lang="en"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{main}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main layout:fragment="content" class="mainpanel pb-8
+    dark:bg-element-dark">
+        <header class=" flex flex-col mb-10">
+            <div class="flex justify-between text-2xl font-medium items-center">
+                <div class="flex items-center">
+                    <div th:text="${tasklist.title}"></div>
+                    <a th:href="@{/lists/delete/{id}(id=${tasklist.id})}" class="group/options-icon">
+                        <svg class="list-options-svg" fill="#e8eaed" viewBox="0 -960 960 960"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                    </a>
+                    <a th:href="@{/lists/edit/{id}(id=${tasklist.id})}" class="group/options-icon">
+                        <svg class="list-options-svg" fill="#e8eaed" viewBox="0 -960 960 960"><path d="M160-400v-80h280v80H160Zm0-160v-80h440v80H160Zm0-160v-80h440v80H160Zm360 560v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q8 9 12.5 20t4.5 22q0 11-4 22.5T863-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z"/></svg>
+                    </a>
+                    <a th:href="@{/lists/new-sublist-on/{id}(id=${tasklist.id})}" class="group/options-icon">
+                        <svg class="list-options-svg" fill="#e8eaed" viewBox="0 -960 960 960"><path d="M120-320v-80h280v80H120Zm0-160v-80h440v80H120Zm0-160v-80h440v80H120Zm520 480v-160H480v-80h160v-160h80v160h160v80H720v160h-80Z"/></svg>
+                    </a>
+                </div>
+                <div th:text="${tasklist.progress}"></div>
+            </div>
 
-<div th:each="link:${tasklist.links}"> <!-- cada task -->
-    <th:block th:each="task:${link.task}">
-        <span th:text="${task.title}"></span> &#40<span th:text="${task.finished}"></span>&#41 pos: <span th:text="${link.taskListPosition}"></span>
+            <div id="list-basic-info">
+                <span th:text="${'Created in '} + ${#dates.dayOfWeekName(tasklist.createdAt)} + ${#dates.format(tasklist.createdAt, ', MMM dd, yyyy')}" class="text-xs text-handle-dark"></span>
+                <p th:text="${tasklist.description}" class="text-speech-dark-hover"></p>
+            </div>
+        </header>
+        
 
-        <form method="post" th:action="@{/task/up/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${link.id})}" style="display:inline;"> <input type="submit" value="climb"> </form>    
-        <form method="post" th:action="@{/task/down/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${link.id})}" style="display:inline;"> <input type="submit" value="down"> </form>    
+        
+        
+        <div id="main-operations">
+            <a th:each="sublist, stats:${tasklist.childs}" th:href="@{/lists/{id}(id=${sublist.id})}" class="group/sublist-element w-max"> <!-- cada sublista -->
+                <div class="flex w-max"> 
+                    <svg class="sublist-svg" th:unless="${tasklist.progresses[stats.index]}" viewBox="0 -960 960 960" fill="#e8eaed"><path d="M640-120q-33 0-56.5-23.5T560-200v-160q0-33 23.5-56.5T640-440h160q33 0 56.5 23.5T880-360v160q0 33-23.5 56.5T800-120H640Zm0-80h160v-160H640v160ZM80-240v-80h360v80H80Zm560-280q-33 0-56.5-23.5T560-600v-160q0-33 23.5-56.5T640-840h160q33 0 56.5 23.5T880-760v160q0 33-23.5 56.5T800-520H640Zm0-80h160v-160H640v160ZM80-640v-80h360v80H80Zm640 360Zm0-400Z"/></svg>
+                    <svg class="sublist-svg" th:if="${tasklist.progresses[stats.index]}" viewBox="0 -960 960 960" fill="#e8eaed"><path d="M655-200 513-342l56-56 85 85 170-170 56 57-225 226Zm0-320L513-662l56-56 85 85 170-170 56 57-225 226ZM80-280v-80h360v80H80Zm0-320v-80h360v80H80Z"/></svg>
+                    <div th:text="${sublist.title}" class="text-xl group-hover/sublist-element:text-speech-dark-hover transition"></div> <!-- /*- <span th:text="${tasklist.progresses[stats.index]}"></span>*/ -->
+                </div>
+            </a>
+            <th:block th:each="link:${tasklist.links}"> <!-- cada task -->
+                <div th:each="task:${link.task}" class="group/task-element flex items-center justify-between text-xl">
+                    
+                    <div class="flex items-center">
+                        <form method="post" th:action="@{/task/finish/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${task.id})}" class="h-8 pr-1"> 
+                            <label class="cursor-pointer">
+                                <img th:if="${task.finished}" th:src="@{/icons/checkbox.svg}" class="checkbox-img" alt="">
+                                <img th:unless="${task.finished}" th:src="@{/icons/checkbox_outline.svg}" class="checkbox-img" alt="">
+                                <input type="submit" value="">
+                            </label>
+                        </form>
+                        <div th:text="${task.title}" class="text-xl"></div>
+                    </div>
 
-        <form method="post" th:action="@{/task/finish/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${task.id})}" style="display:inline;"> <input type="submit" value="finish"> </form>
-        <form method="post" th:action="@{/task/delete/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${task.id})}" style="display:inline;"> <input type="submit" value="delete"> </form>
-        <form method="post" th:action="@{/task/{id}/unlink-of/{tasklistid}(id=${task.id}, tasklistid=${tasklist.id})}" style="display:inline;"> <input type="submit" value="unlink"> </form>
-        <a th:href="@{/task/link/{id}/backto/{tasklistid}(id=${task.id}, tasklistid=${tasklist.id})}">link to another list</a>
-    </th:block>
-</div>
+                    <div class="invisible group-hover/task-element:visible flex group">
+                        <form method="post" th:action="@{/task/up/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${link.id})}" style="display:inline;">
+                            <label><input hidden type="submit" value="climb">
+                                <svg class="form-svg" fill="#e8eaed" viewBox="0 -960 960 960"><path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/></svg>
+                            </label>
+                        </form>    
 
-<div>
-    <form th:action="@{/task/create/{id}(id=${tasklist.id})}" method="post">
-        <input type="text" name="title" id="" placeholder="title">
-        <input type="submit" value="add">
-    </form>
-</div>
+                        <form method="post" th:action="@{/task/down/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${link.id})}" style="display:inline;">
+                            <label><input hidden type="submit" value="down">
+                                <svg class="form-svg" fill="#e8eaed" viewBox="0 -960 960 960"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                            </label>
+                        </form>   
 
-<h6>sublistas</h6>
-<div th:each="sublist, stats:${tasklist.childs}">
-        <a th:href="@{/lists/{id}(id=${sublist.id})}">
-            <span th:text="${sublist.title}"></span> - <span th:text="${tasklist.progresses[stats.index]}"></span>
-        </a>
-</div>
+                        <a th:href="@{/task/link/{id}/backto/{tasklistid}(id=${task.id}, tasklistid=${tasklist.id})}">
+                            <svg class="link-svg" fill="#e8eaed" viewBox="0 -960 960 960"><path d="M720-80q-50 0-85-35t-35-85q0-7 1-14.5t3-13.5L322-392q-17 15-38 23.5t-44 8.5q-50 0-85-35t-35-85q0-50 35-85t85-35q23 0 44 8.5t38 23.5l282-164q-2-6-3-13.5t-1-14.5q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35q-23 0-44-8.5T638-672L356-508q2 6 3 13.5t1 14.5q0 7-1 14.5t-3 13.5l282 164q17-15 38-23.5t44-8.5q50 0 85 35t35 85q0 50-35 85t-85 35Zm0-640q17 0 28.5-11.5T760-760q0-17-11.5-28.5T720-800q-17 0-28.5 11.5T680-760q0 17 11.5 28.5T720-720ZM240-440q17 0 28.5-11.5T280-480q0-17-11.5-28.5T240-520q-17 0-28.5 11.5T200-480q0 17 11.5 28.5T240-440Zm480 280q17 0 28.5-11.5T760-200q0-17-11.5-28.5T720-240q-17 0-28.5 11.5T680-200q0 17 11.5 28.5T720-160Zm0-600ZM240-480Zm480 280Z"/></svg>
+                        </a>
+
+                        <form method="post" th:action="@{/task/delete/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${task.id})}" style="display:inline;"> 
+                            <label><input hidden type="submit" value="delete" class="dark:text-handle-dark hover:text-handle-dark-hover transition cursor-pointer"> 
+                                <svg class="form-svg" fill="#e8eaed" viewBox="0 -960 960 960"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                            </label>
+                        </form>
+
+                        <form method="post" th:action="@{/task/{id}/unlink-of/{tasklistid}(id=${task.id}, tasklistid=${tasklist.id})}" style="display:inline;">
+                            <label><input hidden type="submit" value="unlink">
+                                <svg class="form-svg" fill="#e8eaed" viewBox="0 -960 960 960"><path d="M720-720q17 0 28.5-11.5T760-760q0-17-11.5-28.5T720-800q-17 0-28.5 11.5T680-760q0 17 11.5 28.5T720-720Zm0 560q17 0 28.5-11.5T760-200q0-17-11.5-28.5T720-240q-17 0-28.5 11.5T680-200q0 17 11.5 28.5T720-160Zm0-600Zm0 560ZM240-40q-83 0-141.5-58.5T40-240q0-83 58.5-141.5T240-440q83 0 141.5 58.5T440-240q0 83-58.5 141.5T240-40ZM121-493q5-45 38.5-76t80.5-31q23 0 44 8.5t38 23.5l282-164q-2-6-3-13.5t-1-14.5q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35q-23 0-44-8.5T638-672L356-508q1 4 1.5 7.5t1.5 7.5q-27-13-57-20t-62-7q-32 0-62 7t-57 20ZM720-80q-50 0-85-35t-35-85q0-7 1-14.5t3-13.5l-87-50q-4-27-12.5-52T483-378l155 90q17-15 38-23.5t44-8.5q50 0 85 35t35 85q0 50-35 85t-85 35ZM240-212l70 71 29-28-71-71 71-71-28-28-71 71-71-71-28 28 71 71-71 71 28 28 71-71Z"/></svg>
+                            </label>
+                        </form>
+                    </div>
+                    
+                    <!--/*
+                    &#40<span th:text="${task.finished}"></span>&#41 pos: <span th:text="${link.taskListPosition}"></span>
+
+                    
+                    
+
+                    
+                        
+                        
+                    
+                        
+                    */-->
+                </div>
+            </th:block>
+
+            <div id="new-task-button" class="group/new-task-button flex items-center cursor-pointer mt-1" onclick="toggleById('new-task-form'); toggleDisplayById('new-task-button')">
+                <!--/*<img th:src="@{/icons/add.svg}" alt="">*/-->
+                <svg class="fill-handle-dark h-8 pr-1 group-hover/new-task-button:fill-handle-dark-hover" fill="#eDeDed" viewBox="0 -960 960 960"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                <div class="text-handle-dark text-xl group-hover/new-task-button:text-handle-dark-hover transition">New task</div>
+            </div>
+
+            <div hidden id="new-task-form">
+                <form th:action="@{/task/create/{id}(id=${tasklist.id})}" method="post" class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <svg class="h-8 block pr-1 fill-handle-dark " fill="#eDeDed" viewBox="0 -960 960 960"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Z"/></svg>
+                        <input type="text" name="title" id="" maxlength="30" placeholder="Title" class="block bg-transparent outline-none w-56  placeholder:text-xl text-xl focus:border-b-2 focus:border-handle-dark placeholder-handle-dark-hover">
+                    </div>
+                    <div class="flex items-center">
+                        <input type="submit" value="Enter to add" class="block text-handle-dark cursor-pointer hover:text-handle-dark-hover ">
+                        <div onclick="toggleDisplayById('new-task-button'); toggleById('new-task-form')" class="cursor-pointer text-handle-dark hover:text-handle-dark-hover">
+                            <p>&nbsp&#8209&nbspClose</p>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+
+        
+
+        <script type="text/javascript" th:src="@{/js/toggle.js}"></script>
+    </main>
+
+    
+</body>
+</html>

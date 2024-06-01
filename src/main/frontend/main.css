@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .mainpanel {
+        @apply mx-auto w-[28em] mt-10 p-3 px-6 rounded-lg;
+    }
+
+    .tasklist {
+        @apply p-[.25em] px-2 mb-3 rounded-lg flex justify-between text-xl transition font-medium
+        dark:bg-element-dark dark:hover:bg-element-dark-hover;
+    }
+
+    .add-new {
+        @apply tasklist block flex justify-center
+        dark:bg-handle-dark dark:hover:bg-handle-dark-hover cursor-pointer;
+    }
+
+    .checkbox-img {
+        @apply h-8;
+    }
+
+    .sublist-svg {
+        @apply pr-1 h-8 group-hover/sublist-element:fill-speech-dark-hover;
+    }
+
+    .list-options-svg {
+        @apply h-6 fill-handle-dark group-hover/options-icon:fill-handle-dark-hover ml-1
+    }
+
+    .form-svg {
+        @apply h-6 fill-handle-dark hover:fill-handle-dark-hover cursor-pointer ml-1
+    }
+
+    .link-svg {
+        @apply pr-1 h-6 fill-handle-dark group-hover:fill-handle-dark-hover;
+    }
+}
