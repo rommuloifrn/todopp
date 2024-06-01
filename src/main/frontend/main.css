@@ -34,6 +34,6 @@
     }
 
     .link-svg {
-        @apply pr-1 h-6 fill-handle-dark group-hover:fill-handle-dark-hover;
+        @apply pr-1 h-6 fill-handle-dark hover:fill-handle-dark-hover;
     }
 }

@@ -684,7 +684,7 @@ video {
   padding-right: 0.25rem;
 }
 
-.group:hover .link-svg {
+.link-svg:hover {
   fill: #414141;
 }
 
@@ -716,29 +716,13 @@ video {
   height: 2rem;
 }
 
+.w-56 {
+  width: 14rem;
+}
+
 .w-max {
   width: -moz-max-content;
   width: max-content;
-}
-
-.w-auto {
-  width: auto;
-}
-
-.w-20 {
-  width: 5rem;
-}
-
-.w-40 {
-  width: 10rem;
-}
-
-.w-60 {
-  width: 15rem;
-}
-
-.w-56 {
-  width: 14rem;
 }
 
 .cursor-pointer {
