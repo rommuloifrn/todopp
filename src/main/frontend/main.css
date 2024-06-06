@@ -22,7 +22,7 @@
     }
 
     .sublist-svg {
-        @apply pr-1 h-8 group-hover/sublist-element:fill-speech-dark-hover;
+        @apply pr-1 h-8 group-hover/sublist-element:fill-speech-dark-hover transition;
     }
 
     .list-options-svg {
