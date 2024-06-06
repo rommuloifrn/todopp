@@ -13,6 +13,8 @@
             <div th:replace="tasklist/fragments/sublist_fragment :: sublist"></div>
         </th:block>
 
+        <div class="h-3"></div>
+
         <th:block th:each="link:${tasklist.links}"> <!-- cada link -->
             <th:block th:each="task:${link.task}"> <!-- cada task -->
                 <div th:replace="tasklist/fragments/task_fragment :: task"></div>

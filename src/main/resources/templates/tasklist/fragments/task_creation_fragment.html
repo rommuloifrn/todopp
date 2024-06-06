@@ -1,7 +1,7 @@
 <div th:fragment="task_create">
     <div id="new-task-button" class="group/new-task-button flex items-center cursor-pointer mt-1" onclick="toggleById('new-task-form'); toggleDisplayById('new-task-button')">
         <!--/*<img th:src="@{/icons/add.svg}" alt="">*/-->
-        <svg class="fill-handle-dark h-8 pr-1 group-hover/new-task-button:fill-handle-dark-hover" fill="#eDeDed" viewBox="0 -960 960 960"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+        <svg class="fill-handle-dark h-8 pr-1 group-hover/new-task-button:fill-handle-dark-hover transition" fill="#eDeDed" viewBox="0 -960 960 960"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
         <div class="text-handle-dark text-xl group-hover/new-task-button:text-handle-dark-hover transition">New task</div>
     </div>
     
@@ -13,6 +13,7 @@
             </div>
             <div class="flex items-center">
                 <input type="submit" value="Enter to add" class="block text-handle-dark cursor-pointer hover:text-handle-dark-hover ">
+
                 <div onclick="toggleDisplayById('new-task-button'); toggleById('new-task-form')" class="cursor-pointer text-handle-dark hover:text-handle-dark-hover">
                     <p>&nbsp&#8209&nbspClose</p>
                 </div>
