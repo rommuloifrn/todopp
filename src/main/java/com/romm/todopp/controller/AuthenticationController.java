@@ -44,6 +44,11 @@ public class AuthenticationController {
         model.addAttribute("loginError", true);
         return "auth/login";
     }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return new String("logged_out");
+    }
     
 
     // @PostMapping("/login")
