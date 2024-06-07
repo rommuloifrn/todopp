@@ -22,6 +22,7 @@ public class SecurityConfigurations {
         .requestMatchers("/auth/**").permitAll()
         .requestMatchers("/h2-console/**").permitAll()
         .requestMatchers("/h2-database/**").permitAll()
+        .requestMatchers("/css/**").permitAll()
         
         .anyRequest().authenticated()
         )
