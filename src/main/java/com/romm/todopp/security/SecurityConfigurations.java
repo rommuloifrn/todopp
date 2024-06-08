@@ -29,6 +29,7 @@ public class SecurityConfigurations {
         .formLogin(formLogin -> formLogin
             .loginPage("/auth/login")
             .loginProcessingUrl("/auth/login")
+            .successForwardUrl("/lists")
             .failureUrl("/auth/login-error")
             .defaultSuccessUrl("/lists")
             //.failureForwardUrl(null)
