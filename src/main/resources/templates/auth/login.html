@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>todo++ - Login</title>
     <link th:href="@{/css/main.css}" rel="stylesheet" />
 </head>
 <body class="floor flex justify-center items-center h-[100vh]">
-    <div class="p-8 rounded-md bg-element-dark mb-5">
-        <div class="text-3xl font-semibold mb-3">
+    <main class="auth-main">
+        <div class="auth-main-title">
             Login
         </div>
 
@@ -20,8 +20,8 @@
             <label><p hidden>Password</p>
                 <input type="password" name="password" id="" placeholder="password" class="input">
             </label>
-            <input type="submit" value="Login" class="flex p-3  font-semibold rounded-sm mt-3 w-full cursor-pointer transition hover:bg-speech-dark-hover bg-speech-dark text-floor-dark">
+            <input type="submit" value="Login" class="whole-button">
         </form>
-    </div>
+    </main>
 </body>
 </html>

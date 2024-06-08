@@ -1,20 +1,28 @@
-<h1>register</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo++ - Sign up</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body class="floor flex justify-center items-center h-[100vh]">
+    <main class="auth-main">
+        <div class="auth-main-title">Sign up</div>
 
-<form method="post" th:action="@{'/auth/register'}">
-
-    <label>Username
-        <input type="text" name="username" id="id_username">
-    </label>
-
-    <label>Password
-        <input type="password" name="password" id="">
-    </label>
-
-    <label>Email
-        <input type="email" name="email" id="">
-    </label>
-    
-    
-
-    <input type="submit" value="Submit">
-</form>
+        <form method="post" th:action="@{'/auth/register'}">
+            <label><p class="text-handle-dark text-sm">Username</p>
+                <input type="text" name="username" id="" class="input mb-2">
+            </label>
+            <label><p class="text-handle-dark text-sm">Password</p>
+                <input type="password" name="password" id="" class="input mb-2">
+            </label>
+            <label><p class="text-handle-dark text-sm">Email</p>
+                <input type="email" name="email" id="" class="input mb-2">
+            </label>
+            
+            <input type="submit" value="Sign up" class="whole-button">
+        </form>
+    </main>
+</body>
+</html>

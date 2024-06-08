@@ -44,12 +44,24 @@
 
 
     .input {
-        @apply bg-element-dark rounded-sm outline-none border-b border-speech-dark;
+        @apply bg-element-dark rounded-sm outline-none border-b border-handle-dark focus:border-speech-dark;
+    }
+
+    .whole-button {
+        @apply flex p-3  font-semibold rounded-sm mt-3 w-full cursor-pointer transition hover:bg-speech-dark-hover bg-speech-dark text-floor-dark;
     }
 }
 
 @layer base {
     .floor {
         @apply dark:bg-floor-dark dark:text-speech-dark;
+    }
+
+    .auth-main {
+        @apply p-8 rounded-md bg-element-dark mb-5;
+    }
+
+    .auth-main-title {
+        @apply text-3xl font-semibold mb-3;
     }
 }
