@@ -1,12 +1,27 @@
-<h1>Login</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body class="floor flex justify-center items-center h-[100vh]">
+    <div class="p-8 rounded-md bg-element-dark mb-5">
+        <div class="text-3xl font-semibold mb-3">
+            Login
+        </div>
 
-<form th:action="@{'/auth/login'}" method="post">
-    <p th:if="${loginError}" class="error">Wrong user or password</p>
-    <label>Username
-        <input type="text" name="username" id="" autofocus>
-    </label> <br>
-    <label>Password
-        <input type="password" name="password" id="">
-    </label>
-    <input type="submit" value="Login">
-</form>
+        <form th:action="@{'/auth/login'}" method="post">
+            <p th:if="${loginError}" class="error">Wrong user or password</p>
+            <label><p hidden>Username</p>
+                <input type="text" name="username" id="" autofocus placeholder="username" class="input mb-3">
+            </label> <br>
+            <label><p hidden>Password</p>
+                <input type="password" name="password" id="" placeholder="password" class="input">
+            </label>
+            <input type="submit" value="Login" class="flex p-3  font-semibold rounded-sm mt-3 w-full cursor-pointer transition hover:bg-speech-dark-hover bg-speech-dark text-floor-dark">
+        </form>
+    </div>
+</body>
+</html>

@@ -17,7 +17,7 @@
     }
 
     .add-new {
-        @apply tasklist block flex justify-center
+        @apply tasklist flex justify-center
         dark:bg-handle-dark dark:hover:bg-handle-dark-hover cursor-pointer;
     }
 
@@ -39,5 +39,17 @@
 
     .link-svg {
         @apply pr-1 h-6 fill-handle-dark hover:fill-handle-dark-hover;
+    }
+
+
+
+    .input {
+        @apply bg-element-dark rounded-sm outline-none border-b border-speech-dark;
+    }
+}
+
+@layer base {
+    .floor {
+        @apply dark:bg-floor-dark dark:text-speech-dark;
     }
 }
