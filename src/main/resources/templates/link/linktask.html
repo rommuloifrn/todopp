@@ -1,9 +1,23 @@
-<h2>Listas</h2>
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{main}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link task</title>
+</head>
+<body>
+    <main layout:fragment="content" class="mainpanel pb-8 ">
+        <div class="auth-main-title text-2xl">
+            Link task "<span th:text="${task.title}"></span>" to
+        </div>
 
-<ul>
-    <li th:each="taskList:${taskLists}">
-        <form method="post" th:action="@{/task/{taskId}/linkto/{taskListId}/backto/{originTaskListId}(taskId=${taskId}, taskListId=${taskList.id}, originTaskListId=${originTaskListId})}">
-            <button type="submit" th:text="${taskList.title}"></button>
-        </form>
-    </li>
-</ul>
+        
+        <th:block th:each="taskList:${taskLists}">
+            <form method="post" th:action="@{/task/{taskId}/linkto/{taskListId}/backto/{originTaskListId}(taskId=${task.id}, taskListId=${taskList.id}, originTaskListId=${originTaskListId})}">
+                <button type="submit" th:text="${taskList.title}" class="tasklist w-full"></button>
+            </form>
+        </th:block>
+        
+    </main>
+</body>
+</html>

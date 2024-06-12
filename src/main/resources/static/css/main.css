@@ -856,6 +856,10 @@ video {
   display: flex;
 }
 
+.list-item {
+  display: list-item;
+}
+
 .hidden {
   display: none;
 }
@@ -883,6 +887,10 @@ video {
 .w-max {
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-full {
+  width: 100%;
 }
 
 .cursor-pointer {

@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,10 +18,6 @@ import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.service.LinkService;
 import com.romm.todopp.service.TaskListService;
 import com.romm.todopp.service.TaskService;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -68,7 +67,8 @@ public class TaskController {
     @GetMapping("/link/{taskId}/backto/{originTaskListId}")
     public ModelAndView linkTask(@PathVariable Long taskId, @PathVariable Long originTaskListId) {
         List<TaskList> taskLists = taskListService.findAll();
-        return new ModelAndView("link/linktask", Map.of("taskLists", taskLists, "taskId", taskId, "originTaskListId", originTaskListId));
+        var task = taskService.read(taskId);
+        return new ModelAndView("link/linktask", Map.of("taskLists", taskLists, "task", task, "originTaskListId", originTaskListId));
     }
 
     @PostMapping("/{taskId}/linkto/{taskListId}/backto/{originTaskListId}")
