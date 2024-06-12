@@ -852,6 +852,10 @@ video {
   display: block;
 }
 
+.inline {
+  display: inline;
+}
+
 .flex {
   display: flex;
 }
@@ -923,6 +927,10 @@ video {
 
 .fill-handle-dark {
   fill: #565656;
+}
+
+.fill-speech-dark {
+  fill: #EDEDED;
 }
 
 .p-1 {
