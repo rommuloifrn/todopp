@@ -50,6 +50,10 @@
     .whole-button {
         @apply flex p-3  font-semibold rounded-sm mt-3 w-full cursor-pointer transition hover:bg-speech-dark-hover bg-speech-dark text-floor-dark;
     }
+
+    .button {
+        @apply whole-button w-max;
+    }
 }
 
 @layer base {
