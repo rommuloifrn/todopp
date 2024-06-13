@@ -6,7 +6,7 @@
     <title>Delete <th:block th:text="${tasklist.title}"></th:block>?</title>
 </head>
 <body>
-    <main layout:fragment="content" class="mainpanel pb-8 dark:bg-element-dark">
+    <main layout:fragment="content" class="element-panel pb-8">
         <form th:action="@{/lists/delete/{id}(id=${tasklist.id})}" method="post">
             <span class="text-xl">
                 Delete the list "<span th:text="${tasklist.title}"></span>"?

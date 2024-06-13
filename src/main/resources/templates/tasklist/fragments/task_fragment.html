@@ -3,8 +3,10 @@
     <div class="flex items-center">
         <form method="post" th:action="@{/task/finish/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${task.id})}" class="h-8 pr-1"> 
             <label class="cursor-pointer">
-                <img th:if="${task.finished}" th:src="@{/icons/checkbox.svg}" class="checkbox-img" alt="">
-                <img th:unless="${task.finished}" th:src="@{/icons/checkbox_outline.svg}" class="checkbox-img" alt="">
+                <svg th:unless="${task.finished}" class="checkbox" fill="#5f6368" viewBox="0 -960 960 960"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Z"/></svg>
+                <!-- /*<img th:if="${task.finished}" th:src="@{/icons/checkbox.svg}" class="checkbox-img" alt="">*/ -->
+                <svg th:if="${task.finished}" class="checkbox" fill="#eDeDed" viewBox="0 -960 960 960"><path d="m424-312 282-282-56-56-226 226-114-114-56 56 170 170ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+                <!-- /*<img th:unless="${task.finished}" th:src="@{/icons/checkbox_outline.svg}" class="checkbox-img" alt="">*/ -->
                 <input type="submit" value="">
             </label>
         </form>

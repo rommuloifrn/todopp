@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 @layer components {
-    .mainpanel {
-        @apply mx-auto w-[28em] mt-10 p-3 px-6 rounded-lg;
+    .element-panel {
+        @apply hero 
+        bg-element
+        dark:bg-element-dark;
     }
 
     .home-button {
@@ -13,7 +15,15 @@
 
     .tasklist {
         @apply p-[.25em] px-2 mb-3 rounded-lg flex justify-between text-xl transition font-medium
+        bg-element hover:bg-element-h
         dark:bg-element-dark dark:hover:bg-element-dark-hover;
+    }
+
+    .description {
+        @apply 
+        text-speech-h
+        dark:text-speech-dark-hover
+        ;
     }
 
     .add-new {
@@ -25,20 +35,39 @@
         @apply h-8;
     }
 
+    .checkbox {
+        @apply h-8 fill-speech
+        dark:fill-speech-dark;
+    }
+
     .sublist-svg {
-        @apply pr-1 h-8 group-hover/sublist-element:fill-speech-dark-hover transition;
+        @apply checkbox pr-1 transition group-hover/sublist-element:fill-speech-h
+        dark:group-hover/sublist-element:fill-speech-dark-hover;
+    }
+
+    .sublist-text {
+        @apply transition text-xl
+        group-hover/sublist-element:text-speech-h
+        dark:group-hover/sublist-element:text-speech-dark-hover 
+        ;
     }
 
     .list-options-svg {
-        @apply h-6 fill-handle-dark group-hover/options-icon:fill-handle-dark-hover ml-1
+        @apply h-6 ml-1
+        fill-handle group-hover/options-icon:fill-handle-h
+        dark:fill-handle-dark dark:group-hover/options-icon:fill-handle-dark-hover;
     }
 
     .form-svg {
-        @apply h-6 fill-handle-dark hover:fill-handle-dark-hover cursor-pointer ml-1
+        @apply h-6 cursor-pointer ml-1
+        fill-handle hover:fill-handle-h
+        dark:fill-handle-dark dark:hover:fill-handle-dark-hover;
     }
 
     .link-svg {
-        @apply pr-1 h-6 fill-handle-dark hover:fill-handle-dark-hover;
+        @apply pr-1 h-6 
+        fill-handle hover:fill-handle-h
+        dark:fill-handle-dark dark:hover:fill-handle-dark-hover;
     }
 
 
@@ -57,8 +86,10 @@
 }
 
 @layer base {
+
     .floor {
-        @apply dark:bg-floor-dark dark:text-speech-dark;
+        @apply bg-floor text-speech
+        dark:bg-floor-dark dark:text-speech-dark;
     }
 
     .auth-main {
@@ -67,5 +98,11 @@
 
     .auth-main-title {
         @apply text-3xl font-semibold mb-3;
+    }
+}
+
+@layer utilities {
+    .hero {
+        @apply mx-auto w-[28em] mt-10 p-3 px-6 rounded-lg;
     }
 }

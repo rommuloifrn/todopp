@@ -446,6 +446,13 @@ video {
   display: none;
 }
 
+.floor {
+  --tw-bg-opacity: 1;
+  background-color: rgb(215 215 215 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(37 37 37 / var(--tw-text-opacity));
+}
+
 @media (prefers-color-scheme: dark) {
   .floor {
     --tw-bg-opacity: 1;
@@ -578,7 +585,9 @@ video {
   --tw-contain-style:  ;
 }
 
-.mainpanel {
+.element-panel {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 243 243 / var(--tw-bg-opacity));
   margin-left: auto;
   margin-right: auto;
   margin-top: 2.5rem;
@@ -587,6 +596,13 @@ video {
   padding: 0.75rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .element-panel {
+    --tw-bg-opacity: 1;
+    background-color: rgb(16 16 16 / var(--tw-bg-opacity));
+  }
 }
 
 .home-button {
@@ -620,6 +636,8 @@ video {
   display: flex;
   justify-content: space-between;
   border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 243 243 / var(--tw-bg-opacity));
   padding: .25em;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -631,6 +649,11 @@ video {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.tasklist:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 235 235 / var(--tw-bg-opacity));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -645,11 +668,25 @@ video {
   }
 }
 
+.description {
+  --tw-text-opacity: 1;
+  color: rgb(78 78 78 / var(--tw-text-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  .description {
+    --tw-text-opacity: 1;
+    color: rgb(181 181 181 / var(--tw-text-opacity));
+  }
+}
+
 .add-new {
   margin-bottom: 0.75rem;
   display: flex;
   justify-content: space-between;
   border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 243 243 / var(--tw-bg-opacity));
   padding: .25em;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -661,6 +698,11 @@ video {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.add-new:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 235 235 / var(--tw-bg-opacity));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -697,8 +739,29 @@ video {
   height: 2rem;
 }
 
+.checkbox {
+  height: 2rem;
+  fill: #252525;
+}
+
+@media (prefers-color-scheme: dark) {
+  .checkbox {
+    fill: #EDEDED;
+  }
+}
+
 .sublist-svg {
   height: 2rem;
+  fill: #252525;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sublist-svg {
+    fill: #EDEDED;
+  }
+}
+
+.sublist-svg {
   padding-right: 0.25rem;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -708,38 +771,96 @@ video {
 }
 
 .group\/sublist-element:hover .sublist-svg {
-  fill: #b5b5b5;
+  fill: #4E4E4E;
+}
+
+@media (prefers-color-scheme: dark) {
+  .group\/sublist-element:hover .sublist-svg {
+    fill: #b5b5b5;
+  }
+}
+
+.sublist-text {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.group\/sublist-element:hover .sublist-text {
+  --tw-text-opacity: 1;
+  color: rgb(78 78 78 / var(--tw-text-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  .group\/sublist-element:hover .sublist-text {
+    --tw-text-opacity: 1;
+    color: rgb(181 181 181 / var(--tw-text-opacity));
+  }
 }
 
 .list-options-svg {
   margin-left: 0.25rem;
   height: 1.5rem;
-  fill: #565656;
+  fill: #828282;
 }
 
 .group\/options-icon:hover .list-options-svg {
-  fill: #414141;
+  fill: #565656;
+}
+
+@media (prefers-color-scheme: dark) {
+  .list-options-svg {
+    fill: #565656;
+  }
+
+  .group\/options-icon:hover .list-options-svg {
+    fill: #414141;
+  }
 }
 
 .form-svg {
   margin-left: 0.25rem;
   height: 1.5rem;
   cursor: pointer;
-  fill: #565656;
+  fill: #828282;
 }
 
 .form-svg:hover {
-  fill: #414141;
+  fill: #565656;
+}
+
+@media (prefers-color-scheme: dark) {
+  .form-svg {
+    fill: #565656;
+  }
+
+  .form-svg:hover {
+    fill: #414141;
+  }
 }
 
 .link-svg {
   height: 1.5rem;
-  fill: #565656;
+  fill: #828282;
   padding-right: 0.25rem;
 }
 
 .link-svg:hover {
-  fill: #414141;
+  fill: #565656;
+}
+
+@media (prefers-color-scheme: dark) {
+  .link-svg {
+    fill: #565656;
+  }
+
+  .link-svg:hover {
+    fill: #414141;
+  }
 }
 
 .input {
@@ -848,10 +969,6 @@ video {
   margin-top: 0.75rem;
 }
 
-.ml-5 {
-  margin-left: 1.25rem;
-}
-
 .block {
   display: block;
 }
@@ -925,6 +1042,10 @@ video {
   background-color: transparent;
 }
 
+.fill-handle {
+  fill: #828282;
+}
+
 .fill-handle-dark {
   fill: #565656;
 }
@@ -943,10 +1064,6 @@ video {
 
 .pr-1 {
   padding-right: 0.25rem;
-}
-
-.text-center {
-  text-align: center;
 }
 
 .text-2xl {
@@ -982,14 +1099,14 @@ video {
   font-weight: 600;
 }
 
+.text-handle {
+  --tw-text-opacity: 1;
+  color: rgb(130 130 130 / var(--tw-text-opacity));
+}
+
 .text-handle-dark {
   --tw-text-opacity: 1;
   color: rgb(86 86 86 / var(--tw-text-opacity));
-}
-
-.text-speech-dark-hover {
-  --tw-text-opacity: 1;
-  color: rgb(181 181 181 / var(--tw-text-opacity));
 }
 
 .placeholder-handle-dark-hover::-moz-placeholder {
@@ -1000,6 +1117,16 @@ video {
 .placeholder-handle-dark-hover::placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(65 65 65 / var(--tw-placeholder-opacity));
+}
+
+.placeholder-handle-h::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(86 86 86 / var(--tw-placeholder-opacity));
+}
+
+.placeholder-handle-h::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(86 86 86 / var(--tw-placeholder-opacity));
 }
 
 .outline-none {
@@ -1013,6 +1140,17 @@ video {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.hero {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5rem;
+  width: 28em;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .placeholder\:text-xl::-moz-placeholder {
@@ -1030,6 +1168,11 @@ video {
   color: rgb(65 65 65 / var(--tw-text-opacity));
 }
 
+.hover\:text-handle-h:hover {
+  --tw-text-opacity: 1;
+  color: rgb(86 86 86 / var(--tw-text-opacity));
+}
+
 .focus\:border-b-2:focus {
   border-bottom-width: 2px;
 }
@@ -1039,30 +1182,29 @@ video {
   border-color: rgb(86 86 86 / var(--tw-border-opacity));
 }
 
+.focus\:border-handle:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(130 130 130 / var(--tw-border-opacity));
+}
+
 .group\/task-element:hover .group-hover\/task-element\:visible {
   visibility: visible;
 }
 
-.group\/new-task-button:hover .group-hover\/new-task-button\:fill-handle-dark-hover {
-  fill: #414141;
+.group\/new-task-button:hover .group-hover\/new-task-button\:fill-handle-h {
+  fill: #565656;
 }
 
-.group\/new-task-button:hover .group-hover\/new-task-button\:text-handle-dark-hover {
-  --tw-text-opacity: 1;
-  color: rgb(65 65 65 / var(--tw-text-opacity));
+.group:hover .group-hover\:fill-handle-h {
+  fill: #565656;
 }
 
-.group\/sublist-element:hover .group-hover\/sublist-element\:text-speech-dark-hover {
+.group:hover .group-hover\:text-handle-h {
   --tw-text-opacity: 1;
-  color: rgb(181 181 181 / var(--tw-text-opacity));
+  color: rgb(86 86 86 / var(--tw-text-opacity));
 }
 
 @media (prefers-color-scheme: dark) {
-  .dark\:bg-element-dark {
-    --tw-bg-opacity: 1;
-    background-color: rgb(16 16 16 / var(--tw-bg-opacity));
-  }
-
   .dark\:bg-element-dark-hover {
     --tw-bg-opacity: 1;
     background-color: rgb(8 8 8 / var(--tw-bg-opacity));
@@ -1073,6 +1215,10 @@ video {
     background-color: rgb(37 37 37 / var(--tw-bg-opacity));
   }
 
+  .dark\:fill-handle-dark {
+    fill: #565656;
+  }
+
   .dark\:text-handle-dark {
     --tw-text-opacity: 1;
     color: rgb(86 86 86 / var(--tw-text-opacity));
@@ -1081,5 +1227,43 @@ video {
   .dark\:text-speech-dark {
     --tw-text-opacity: 1;
     color: rgb(237 237 237 / var(--tw-text-opacity));
+  }
+
+  .dark\:placeholder-handle-dark-hover::-moz-placeholder {
+    --tw-placeholder-opacity: 1;
+    color: rgb(65 65 65 / var(--tw-placeholder-opacity));
+  }
+
+  .dark\:placeholder-handle-dark-hover::placeholder {
+    --tw-placeholder-opacity: 1;
+    color: rgb(65 65 65 / var(--tw-placeholder-opacity));
+  }
+
+  .dark\:hover\:text-handle-dark-hover:hover {
+    --tw-text-opacity: 1;
+    color: rgb(65 65 65 / var(--tw-text-opacity));
+  }
+
+  .dark\:focus\:border-handle-dark:focus {
+    --tw-border-opacity: 1;
+    border-color: rgb(86 86 86 / var(--tw-border-opacity));
+  }
+
+  .group\/new-task-button:hover .dark\:group-hover\/new-task-button\:fill-handle-dark-hover {
+    fill: #414141;
+  }
+
+  .group:hover .dark\:group-hover\:fill-handle-dark-hover {
+    fill: #414141;
+  }
+
+  .group\/new-task-button:hover .dark\:group-hover\/new-task-button\:text-handle-dark-hover {
+    --tw-text-opacity: 1;
+    color: rgb(65 65 65 / var(--tw-text-opacity));
+  }
+
+  .group:hover .dark\:group-hover\:text-handle-dark-hover {
+    --tw-text-opacity: 1;
+    color: rgb(65 65 65 / var(--tw-text-opacity));
   }
 }

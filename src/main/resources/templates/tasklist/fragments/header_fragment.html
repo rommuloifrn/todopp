@@ -17,7 +17,7 @@
     </div>
 
     <div id="list-basic-info">
-        <span th:text="${'Created in '} + ${#dates.dayOfWeekName(tasklist.createdAt)} + ${#dates.format(tasklist.createdAt, ', MMM dd, yyyy')}" class="text-xs text-handle-dark"></span>
-        <p th:text="${tasklist.description}" class="text-speech-dark-hover"></p>
+        <span th:text="${'Created in '} + ${#dates.dayOfWeekName(tasklist.createdAt)} + ${#dates.format(tasklist.createdAt, ', MMM dd, yyyy')}" class="text-xs text-handle dark:text-handle-dark"></span>
+        <p th:text="${tasklist.description}" class="description"></p>
     </div>
 </header>

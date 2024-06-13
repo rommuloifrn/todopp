@@ -2,6 +2,6 @@
     <div class="flex w-max"> 
         <svg class="sublist-svg" th:unless="${tasklist.progresses[stats.index]}" viewBox="0 -960 960 960" fill="#e8eaed"><path d="M640-120q-33 0-56.5-23.5T560-200v-160q0-33 23.5-56.5T640-440h160q33 0 56.5 23.5T880-360v160q0 33-23.5 56.5T800-120H640Zm0-80h160v-160H640v160ZM80-240v-80h360v80H80Zm560-280q-33 0-56.5-23.5T560-600v-160q0-33 23.5-56.5T640-840h160q33 0 56.5 23.5T880-760v160q0 33-23.5 56.5T800-520H640Zm0-80h160v-160H640v160ZM80-640v-80h360v80H80Zm640 360Zm0-400Z"/></svg>
         <svg class="sublist-svg" th:if="${tasklist.progresses[stats.index]}" viewBox="0 -960 960 960" fill="#e8eaed"><path d="M655-200 513-342l56-56 85 85 170-170 56 57-225 226Zm0-320L513-662l56-56 85 85 170-170 56 57-225 226ZM80-280v-80h360v80H80Zm0-320v-80h360v80H80Z"/></svg>
-        <div th:text="${sublist.title}" class="text-xl group-hover/sublist-element:text-speech-dark-hover transition"></div> <!-- /*- <span th:text="${tasklist.progresses[stats.index]}"></span>*/ -->
+        <div th:text="${sublist.title}" class="sublist-text"></div> <!-- /*- <span th:text="${tasklist.progresses[stats.index]}"></span>*/ -->
     </div>
 </a>
