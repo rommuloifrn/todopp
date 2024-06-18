@@ -867,16 +867,30 @@ video {
   border-radius: 0.125rem;
   border-bottom-width: 1px;
   --tw-border-opacity: 1;
-  border-color: rgb(86 86 86 / var(--tw-border-opacity));
+  border-color: rgb(130 130 130 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(16 16 16 / var(--tw-bg-opacity));
+  background-color: rgb(235 235 235 / var(--tw-bg-opacity));
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
 
 .input:focus {
   --tw-border-opacity: 1;
-  border-color: rgb(237 237 237 / var(--tw-border-opacity));
+  border-color: rgb(37 37 37 / var(--tw-border-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  .input {
+    --tw-border-opacity: 1;
+    border-color: rgb(86 86 86 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(8 8 8 / var(--tw-bg-opacity));
+  }
+
+  .input:focus {
+    --tw-border-opacity: 1;
+    border-color: rgb(237 237 237 / var(--tw-border-opacity));
+  }
 }
 
 .whole-button {
@@ -885,12 +899,13 @@ video {
   width: 100%;
   cursor: pointer;
   border-radius: 0.125rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(215 215 215 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(237 237 237 / var(--tw-bg-opacity));
+  background-color: rgb(235 235 235 / var(--tw-bg-opacity));
   padding: 0.75rem;
   font-weight: 600;
-  --tw-text-opacity: 1;
-  color: rgb(37 37 37 / var(--tw-text-opacity));
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -899,8 +914,24 @@ video {
 }
 
 .whole-button:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(130 130 130 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(181 181 181 / var(--tw-bg-opacity));
+  background-color: rgb(215 215 215 / var(--tw-bg-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  .whole-button {
+    --tw-bg-opacity: 1;
+    background-color: rgb(237 237 237 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(37 37 37 / var(--tw-text-opacity));
+  }
+
+  .whole-button:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(181 181 181 / var(--tw-bg-opacity));
+  }
 }
 
 .button {
@@ -909,12 +940,13 @@ video {
   width: 100%;
   cursor: pointer;
   border-radius: 0.125rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(215 215 215 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(237 237 237 / var(--tw-bg-opacity));
+  background-color: rgb(235 235 235 / var(--tw-bg-opacity));
   padding: 0.75rem;
   font-weight: 600;
-  --tw-text-opacity: 1;
-  color: rgb(37 37 37 / var(--tw-text-opacity));
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -923,8 +955,24 @@ video {
 }
 
 .button:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(130 130 130 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(181 181 181 / var(--tw-bg-opacity));
+  background-color: rgb(215 215 215 / var(--tw-bg-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  .button {
+    --tw-bg-opacity: 1;
+    background-color: rgb(237 237 237 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(37 37 37 / var(--tw-text-opacity));
+  }
+
+  .button:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(181 181 181 / var(--tw-bg-opacity));
+  }
 }
 
 .button {
@@ -1038,16 +1086,17 @@ video {
   border-radius: 0.25rem;
 }
 
+.bg-floor {
+  --tw-bg-opacity: 1;
+  background-color: rgb(215 215 215 / var(--tw-bg-opacity));
+}
+
 .bg-transparent {
   background-color: transparent;
 }
 
 .fill-handle {
   fill: #828282;
-}
-
-.fill-handle-dark {
-  fill: #565656;
 }
 
 .fill-speech-dark {
@@ -1109,14 +1158,9 @@ video {
   color: rgb(86 86 86 / var(--tw-text-opacity));
 }
 
-.placeholder-handle-dark-hover::-moz-placeholder {
-  --tw-placeholder-opacity: 1;
-  color: rgb(65 65 65 / var(--tw-placeholder-opacity));
-}
-
-.placeholder-handle-dark-hover::placeholder {
-  --tw-placeholder-opacity: 1;
-  color: rgb(65 65 65 / var(--tw-placeholder-opacity));
+.text-speech {
+  --tw-text-opacity: 1;
+  color: rgb(37 37 37 / var(--tw-text-opacity));
 }
 
 .placeholder-handle-h::-moz-placeholder {
@@ -1177,11 +1221,6 @@ video {
   border-bottom-width: 2px;
 }
 
-.focus\:border-handle-dark:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(86 86 86 / var(--tw-border-opacity));
-}
-
 .focus\:border-handle:focus {
   --tw-border-opacity: 1;
   border-color: rgb(130 130 130 / var(--tw-border-opacity));
@@ -1189,10 +1228,6 @@ video {
 
 .group\/task-element:hover .group-hover\/task-element\:visible {
   visibility: visible;
-}
-
-.group\/new-task-button:hover .group-hover\/new-task-button\:fill-handle-h {
-  fill: #565656;
 }
 
 .group:hover .group-hover\:fill-handle-h {
@@ -1249,17 +1284,8 @@ video {
     border-color: rgb(86 86 86 / var(--tw-border-opacity));
   }
 
-  .group\/new-task-button:hover .dark\:group-hover\/new-task-button\:fill-handle-dark-hover {
-    fill: #414141;
-  }
-
   .group:hover .dark\:group-hover\:fill-handle-dark-hover {
     fill: #414141;
-  }
-
-  .group\/new-task-button:hover .dark\:group-hover\/new-task-button\:text-handle-dark-hover {
-    --tw-text-opacity: 1;
-    color: rgb(65 65 65 / var(--tw-text-opacity));
   }
 
   .group:hover .dark\:group-hover\:text-handle-dark-hover {

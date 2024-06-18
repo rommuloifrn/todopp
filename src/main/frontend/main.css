@@ -73,11 +73,15 @@
 
 
     .input {
-        @apply bg-element-dark rounded-sm outline-none border-b border-handle-dark focus:border-speech-dark;
+        @apply  rounded-sm outline-none border-b
+        bg-element-h border-handle focus:border-speech
+        dark:bg-element-dark-hover dark:border-handle-dark dark:focus:border-speech-dark;
     }
 
     .whole-button {
-        @apply flex p-3  font-semibold rounded-sm mt-3 w-full cursor-pointer transition hover:bg-speech-dark-hover bg-speech-dark text-floor-dark;
+        @apply flex p-3  font-semibold rounded-sm mt-3 w-full cursor-pointer transition border
+        bg-element-h border-floor hover:bg-floor hover:border-handle
+        dark:hover:bg-speech-dark-hover dark:bg-speech-dark dark:text-floor-dark;
     }
 
     .button {
