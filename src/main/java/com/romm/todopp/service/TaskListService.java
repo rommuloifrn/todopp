@@ -12,7 +12,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.romm.todopp.DTO.TaskListUpdateDTO;
 import com.romm.todopp.entity.Link;
-import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.entity.User;
 import com.romm.todopp.repository.TaskListRepository;
