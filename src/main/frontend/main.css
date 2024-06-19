@@ -27,8 +27,9 @@
     }
 
     .add-new {
-        @apply tasklist flex justify-center
-        dark:bg-handle-dark dark:hover:bg-handle-dark-hover cursor-pointer;
+        @apply tasklist flex justify-center cursor-pointer
+        bg-handle hover:bg-handle-h text-floor
+        dark:bg-handle-dark dark:hover:bg-handle-dark-hover dark:text-speech-dark;
     }
 
     .checkbox-img {
@@ -79,8 +80,8 @@
     }
 
     .whole-button {
-        @apply flex p-3  font-semibold rounded-sm mt-3 w-full cursor-pointer transition border
-        bg-element-h border-floor hover:bg-floor hover:border-handle
+        @apply flex p-3  font-semibold rounded mt-3 w-full cursor-pointer transition
+        bg-element hover:bg-element-h border-floor  hover:border-handle
         dark:hover:bg-speech-dark-hover dark:bg-speech-dark dark:text-floor-dark;
     }
 

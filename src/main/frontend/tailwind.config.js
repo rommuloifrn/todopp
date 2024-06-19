@@ -9,9 +9,9 @@ module.exports = {
         colors: {
           'floor': "#D7D7D7",
           'element': "#F3F3F3",
-          'element-h': "#EBEBEB",
+          'element-h': "#E7E7E7",
           'handle': "#828282",
-          'handle-h': "#565656",
+          'handle-h': "#585858",
 
           'speech': "#252525",
           'speech-h': "#4E4E4E",
