@@ -9,10 +9,6 @@
         dark:bg-element-dark;
     }
 
-    .home-button {
-        @apply p-2 text-base bg-speech-dark hover:bg-speech-dark-hover transition text-floor-dark rounded-md font-medium cursor-pointer block w-max;
-    }
-
     .tasklist {
         @apply p-[.25em] px-2 mb-3 rounded-lg flex justify-between text-xl transition font-medium
         bg-element hover:bg-element-h
