@@ -1,4 +1,18 @@
-<form th:action="@{/lists/delete/{id}(id=${tasklist.id})}" method="post">
-    u shure?
-    <input type="submit" value="Yes">
-</form>
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{main}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete <th:block th:text="${tasklist.title}"></th:block>? - todo++</title>
+</head>
+<body>
+    <main layout:fragment="content" class="element-panel pb-8">
+        <form th:action="@{/lists/delete/{id}(id=${tasklist.id})}" method="post">
+            <span class="text-xl">
+                Delete the list "<span th:text="${tasklist.title}"></span>"?
+            </span>
+            <input type="submit" value="Yes" class="button mx-auto">
+        </form>
+    </main>
+</body>
+</html>

@@ -12,7 +12,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.romm.todopp.DTO.TaskListUpdateDTO;
 import com.romm.todopp.entity.Link;
-import com.romm.todopp.entity.Task;
 import com.romm.todopp.entity.TaskList;
 import com.romm.todopp.entity.User;
 import com.romm.todopp.repository.TaskListRepository;
@@ -71,7 +70,7 @@ public class TaskListService {
         return user.getTaskLists();
     }
 
-    private boolean isFinished(TaskList taskList) {
+    public boolean isFinished(TaskList taskList) {
         var links = taskList.getLinks();
         if (links.isEmpty() && taskList.getChilds().isEmpty()) return false;
         for (var link : links) {

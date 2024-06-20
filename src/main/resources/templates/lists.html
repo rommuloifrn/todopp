@@ -1,25 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{main}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lists</title>
+    <title>Lists - todo++</title>
 </head>
 <body>
-    <a th:href="@{'/'}">home</a>
-    Olá, <span th:text="${principal}"></span>!
-    <h2>Listas:</h2>
-    <ul>
-        <li th:each="list, stats:${principal.taskLists}" >
-            <a th:href="@{/lists/{id}(id=${list.id})}">
-                <span th:text="${list.title}"></span> - <span th:text="${progresses[stats.index]}"></span>
-            </a>
-            <a th:href="@{lists/delete/{id}(id=${list.id})}"> delete</a>
-            <a th:href="@{lists/edit/{id}(id=${list.id})}">edit</a>
-        </li>
-        <li>
-            <a th:href="@{'/lists/new'}">Add new</a>
-        </li>
-    </ul>
+    
+        <a th:href="@{'/'}">home</a>
+        
+        <main  layout:fragment="content">
+            <div class="hero">
+                <div class="flex justify-between mb-10">
+                    <div class="text-2xl font-medium">My lists:</div>
+                    <div class="text-2xl font-semibold">
+                        &#64<span th:text="${principal.username}"></span>
+                    </div>
+                </div>
+                
+                
+                <div id="tasklists">
+                    <a th:each="list, stats:${principal.taskLists}" th:href="@{/lists/{id}(id=${list.id})}">
+                        <div class="tasklist">
+                            
+                                <div th:text="${list.title}"></div>
+                                <div th:text="${progresses[stats.index]}"></div>
+                            
+                            <!--
+                                <a th:href="@{lists/delete/{id}(id=${list.id})}"> delete</a>
+                                <a th:href="@{lists/edit/{id}(id=${list.id})}">edit</a>
+                            -->
+                        </div>
+                    </a>
+                    
+                    <a th:href="@{'/lists/new'}"
+                    class="add-new"> 
+                        <div class="flex justify-center items-center">
+                            <svg class="h-8 transition pr-1 
+                            group-hover:fill-handle-h fill-floor
+                            dark:fill-speech-dark dark:group-hover:fill-speech-dark-hover" fill="#eDeDed" viewBox="0 -960 960 960"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg> Add&nbspnew
+                        </div>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </main>
+        
+    
+    
+    
 </body>
 </html>
