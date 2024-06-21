@@ -86,11 +86,29 @@
     }
 
     .simple-link {
-        @apply transition hover:underline;
+        @apply link transition hover:underline;
+    }
+
+    .simple-speech-fading-link {
+        @apply link
+        text-speech hover:text-speech-h
+        dark:text-speech-dark dark:hover:text-speech-dark-hover;
+        ;
+    }
+
+    .simple-handle-fading-link {
+        @apply link
+        text-handle hover:text-handle-h
+        dark:text-handle-dark dark:hover:text-handle-dark-hover;
+        ;
     }
 }
 
 @layer base {
+
+    .link {
+        @apply w-max;
+    }
 
     .floor {
         @apply bg-floor text-speech
@@ -107,7 +125,11 @@
 }
 
 @layer utilities {
+    .mainspacing {
+        @apply mx-auto w-[28em] ;
+    }
+
     .hero {
-        @apply mx-auto w-[28em] mt-10 p-3 px-6 rounded-lg;
+        @apply mainspacing p-3 px-6 rounded-lg mb-40;
     }
 }

@@ -14,7 +14,7 @@ dark:bg-floor-dark dark:text-speech-dark h-[100vh]">
             <div class="text-7xl font-semibold">todo++</div>
 
             <div sec:authorize="!isAuthenticated()" class="text-xl font-medium">
-                Simpler, handier to-do lists
+                Simple, handy to-do lists
             </div>
             <div sec:authorize="isAuthenticated()" class="text-xl font-medium">
                 Logged as @<span th:text="${#authentication.name}"></span>

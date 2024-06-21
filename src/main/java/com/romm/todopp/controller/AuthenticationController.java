@@ -47,7 +47,7 @@ public class AuthenticationController {
 
     @GetMapping("/logout")
     public String logout() {
-        return new String("logged_out");
+        return "auth/logged_out";
     }
     
 

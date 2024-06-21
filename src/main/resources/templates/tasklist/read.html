@@ -1,27 +1,31 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{main}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{main}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><th:block th:text="${tasklist.title}"></th:block> - todo++</title>
 </head>
 <body>
-    <main layout:fragment="content" class="element-panel pb-8">
-        <div th:replace="tasklist/fragments/header_fragment :: header"></div>
+    
+    <main layout:fragment="content">
+        <div th:replace="~{mainheader :: mainheader}"></div>
+        <div class="element-panel pb-8">
+            <div th:replace="~{tasklist/fragments/header_fragment :: header}"></div>
         
-        <th:block th:each="sublist, stats:${tasklist.childs}">
-            <div th:replace="tasklist/fragments/sublist_fragment :: sublist"></div>
-        </th:block>
-
-        <div class="h-3"></div>
-
-        <th:block th:each="link:${tasklist.links}"> <!-- cada link -->
-            <th:block th:each="task:${link.task}"> <!-- cada task -->
-                <div th:replace="tasklist/fragments/task_fragment :: task"></div>
+            <th:block th:each="sublist, stats:${tasklist.childs}">
+                <div th:replace="tasklist/fragments/sublist_fragment :: sublist"></div>
             </th:block>
-        </th:block>
-
-        <div th:replace="tasklist/fragments/task_creation_fragment :: task_create"></div>
+    
+            <div class="h-3"></div>
+    
+            <th:block th:each="link:${tasklist.links}"> <!-- cada link -->
+                <th:block th:each="task:${link.task}"> <!-- cada task -->
+                    <div th:replace="~{tasklist/fragments/task_fragment :: task}"></div>
+                </th:block>
+            </th:block>
+    
+            <div th:replace="~{tasklist/fragments/task_creation_fragment :: task_create}"></div>
+        </div>
 
         <script type="text/javascript" th:src="@{/js/toggle.js}"></script>
     </main>

@@ -40,7 +40,7 @@ public class TaskListController {
         requestingUser.getTaskLists().forEach(list -> {
             listsProgresses.add(taskListService.getProgress(list));
         });
-        return new ModelAndView("lists", Map.of("principal", requestingUser, "progresses", listsProgresses));
+        return new ModelAndView("tasklist/lists", Map.of("principal", requestingUser, "progresses", listsProgresses));
     }
 
     @GetMapping("/new")
