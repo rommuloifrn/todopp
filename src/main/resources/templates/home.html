@@ -4,20 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>todo++</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
 </head>
-<body>
-    <h1>Hi!</h1>
-    <div sec:authorize="isAuthenticated()">
-        <a th:href="@{'/lists'}">lists</a>
-        <form method="post" th:action="@{'/auth/logout'}">
-            <input type="submit" value="logout">
-        </form>
-    </div>
-    
-    <div sec:authorize="!isAuthenticated()">
-        <a th:href="@{'/auth/login'}">login</a>
-        <a th:href="@{'/auth/register'}">register</a>
-    </div>
+<body class=" flex justify-center items-center
+bg-floor text-speech
+dark:bg-floor-dark dark:text-speech-dark h-[100vh]">
+    <main layout:fragment="content" class="flex flex-col justify-center mb-16">
+        <div class="">
+            <div class="text-7xl font-semibold">todo++</div>
+
+            <div sec:authorize="!isAuthenticated()" class="text-xl font-medium">
+                Simple, handy to-do lists
+            </div>
+            <div sec:authorize="isAuthenticated()" class="text-xl font-medium">
+                Logged as @<span th:text="${#authentication.name}"></span>
+            </div>
+        </div>
+
+        <div class="mt-3 flex">
+            <th:block sec:authorize="isAuthenticated()">
+                <a th:href="@{'/lists'}" class="button mr-3">lists</a>
+                <form method="post" th:action="@{'/auth/logout'}" class="">
+                    <input type="submit" value="logout" class="button">
+                </form>
+            </th:block>
+            
+            <th:block sec:authorize="!isAuthenticated()">
+                <a th:href="@{'/auth/login'}" class="button mr-3">login</a>
+                <a th:href="@{'/auth/register'}" class="button">register</a>
+            </th:block>
+        </div>
+    </main>
     
     
     

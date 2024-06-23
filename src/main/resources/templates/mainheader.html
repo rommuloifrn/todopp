@@ -1,0 +1,10 @@
+<div th:fragment="mainheader" class="flex justify-between mb-4 mainspacing px-6">
+    <a th:href="@{/lists}" class="text-2xl simple-handle-fading-link flex items-center">
+        <!-- /*<svg th:if="${tasklist}" class="list-options-svg" fill="#e8eaed" viewBox="0 -960 960 960"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>*/ -->
+        <th:block th:if="${tasklist}">back to</th:block>
+        lists
+    </a>
+    <div class="text-2xl font-semibold">
+        &#64<span th:text="${#authentication?.principal.username}"></span>
+    </div>
+</div>

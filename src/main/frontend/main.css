@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .element-panel {
+        @apply hero 
+        bg-element
+        dark:bg-element-dark;
+    }
+
+    .tasklist {
+        @apply p-[.25em] px-2 mb-3 rounded-lg flex justify-between text-xl transition font-medium
+        bg-element hover:bg-element-h
+        dark:bg-element-dark dark:hover:bg-element-dark-hover;
+    }
+
+    .description {
+        @apply 
+        text-speech-h
+        dark:text-speech-dark-hover
+        ;
+    }
+
+    .add-new {
+        @apply tasklist flex justify-center cursor-pointer
+        bg-handle hover:bg-handle-h text-floor
+        dark:bg-handle-dark dark:hover:bg-handle-dark-hover dark:text-speech-dark;
+    }
+
+    .checkbox-img {
+        @apply h-8;
+    }
+
+    .checkbox {
+        @apply h-8 fill-speech
+        dark:fill-speech-dark;
+    }
+
+    .sublist-svg {
+        @apply checkbox pr-1 transition group-hover/sublist-element:fill-speech-h
+        dark:group-hover/sublist-element:fill-speech-dark-hover;
+    }
+
+    .sublist-text {
+        @apply transition text-xl
+        group-hover/sublist-element:text-speech-h
+        dark:group-hover/sublist-element:text-speech-dark-hover 
+        ;
+    }
+
+    .list-options-svg {
+        @apply h-6 ml-1
+        fill-handle group-hover/options-icon:fill-handle-h
+        dark:fill-handle-dark dark:group-hover/options-icon:fill-handle-dark-hover;
+    }
+
+    .form-svg {
+        @apply h-6 cursor-pointer ml-1
+        fill-handle hover:fill-handle-h
+        dark:fill-handle-dark dark:hover:fill-handle-dark-hover;
+    }
+
+    .link-svg {
+        @apply pr-1 h-6 
+        fill-handle hover:fill-handle-h
+        dark:fill-handle-dark dark:hover:fill-handle-dark-hover;
+    }
+
+
+
+    .input {
+        @apply  rounded-sm outline-none border-b
+        bg-element-h border-handle focus:border-speech
+        dark:bg-element-dark-hover dark:border-handle-dark dark:focus:border-speech-dark;
+    }
+
+    .whole-button {
+        @apply flex p-3  font-semibold rounded mt-3 w-full cursor-pointer transition
+        bg-element hover:bg-element-h border-floor  hover:border-handle
+        dark:hover:bg-speech-dark-hover dark:bg-speech-dark dark:text-floor-dark;
+    }
+
+    .button {
+        @apply whole-button w-max;
+    }
+
+    .simple-link {
+        @apply link transition hover:underline;
+    }
+
+    .simple-speech-fading-link {
+        @apply link
+        text-speech hover:text-speech-h
+        dark:text-speech-dark dark:hover:text-speech-dark-hover;
+        ;
+    }
+
+    .simple-handle-fading-link {
+        @apply link
+        text-handle hover:text-handle-h
+        dark:text-handle-dark dark:hover:text-handle-dark-hover;
+        ;
+    }
+}
+
+@layer base {
+
+    .link {
+        @apply w-max;
+    }
+
+    .floor {
+        @apply bg-floor text-speech
+        dark:bg-floor-dark dark:text-speech-dark;
+    }
+
+    .auth-main {
+        @apply p-8 rounded-md bg-element-dark mb-5;
+    }
+
+    .auth-main-title {
+        @apply text-3xl font-semibold mb-3;
+    }
+}
+
+@layer utilities {
+    .mainspacing {
+        @apply mx-auto w-[28em] ;
+    }
+
+    .hero {
+        @apply mainspacing p-3 px-6 rounded-lg mb-40;
+    }
+}

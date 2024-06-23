@@ -1,33 +1,33 @@
-<h3 th:text="|${tasklist.title} ${tasklist.progress}"></h3>
-<p th:text="${tasklist.description}"></p>
-<p th:text="${tasklist.createdAt}"></p>
-<a th:href="@{/lists/new-sublist-on/{id}(id=${tasklist.id})}">Add sublist</a>
-<h6>tasks</h6>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{main}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><th:block th:text="${tasklist.title}"></th:block> - todo++</title>
+</head>
+<body>
+    
+    <main layout:fragment="content">
+        <div th:replace="~{mainheader :: mainheader}"></div>
+        <div class="element-panel pb-8">
+            <div th:replace="~{tasklist/fragments/header_fragment :: header}"></div>
+        
+            <th:block th:each="sublist, stats:${tasklist.childs}">
+                <div th:replace="tasklist/fragments/sublist_fragment :: sublist"></div>
+            </th:block>
+    
+            <div class="h-3"></div>
+    
+            <th:block th:each="link:${tasklist.links}"> <!-- cada link -->
+                <th:block th:each="task:${link.task}"> <!-- cada task -->
+                    <div th:replace="~{tasklist/fragments/task_fragment :: task}"></div>
+                </th:block>
+            </th:block>
+    
+            <div th:replace="~{tasklist/fragments/task_creation_fragment :: task_create}"></div>
+        </div>
 
-<div th:each="link:${tasklist.links}"> <!-- cada task -->
-    <th:block th:each="task:${link.task}">
-        <span th:text="${task.title}"></span> &#40<span th:text="${task.finished}"></span>&#41 pos: <span th:text="${link.taskListPosition}"></span>
-
-        <form method="post" th:action="@{/task/up/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${link.id})}" style="display:inline;"> <input type="submit" value="climb"> </form>    
-        <form method="post" th:action="@{/task/down/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${link.id})}" style="display:inline;"> <input type="submit" value="down"> </form>    
-
-        <form method="post" th:action="@{/task/finish/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${task.id})}" style="display:inline;"> <input type="submit" value="finish"> </form>
-        <form method="post" th:action="@{/task/delete/{id}/backto/{taskListId}(taskListId=${link.taskList.id}, id=${task.id})}" style="display:inline;"> <input type="submit" value="delete"> </form>
-        <form method="post" th:action="@{/task/{id}/unlink-of/{tasklistid}(id=${task.id}, tasklistid=${tasklist.id})}" style="display:inline;"> <input type="submit" value="unlink"> </form>
-        <a th:href="@{/task/link/{id}/backto/{tasklistid}(id=${task.id}, tasklistid=${tasklist.id})}">link to another list</a>
-    </th:block>
-</div>
-
-<div>
-    <form th:action="@{/task/create/{id}(id=${tasklist.id})}" method="post">
-        <input type="text" name="title" id="" placeholder="title">
-        <input type="submit" value="add">
-    </form>
-</div>
-
-<h6>sublistas</h6>
-<div th:each="sublist, stats:${tasklist.childs}">
-        <a th:href="@{/lists/{id}(id=${sublist.id})}">
-            <span th:text="${sublist.title}"></span> - <span th:text="${tasklist.progresses[stats.index]}"></span>
-        </a>
-</div>
+        <script type="text/javascript" th:src="@{/js/toggle.js}"></script>
+    </main>
+</body>
+</html>

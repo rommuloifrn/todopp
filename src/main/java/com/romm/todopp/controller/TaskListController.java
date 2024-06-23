@@ -1,9 +1,8 @@
 package com.romm.todopp.controller;
 
 import java.security.Principal;
-import java.util.Map;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +40,7 @@ public class TaskListController {
         requestingUser.getTaskLists().forEach(list -> {
             listsProgresses.add(taskListService.getProgress(list));
         });
-        return new ModelAndView("lists", Map.of("principal", requestingUser, "progresses", listsProgresses));
+        return new ModelAndView("tasklist/lists", Map.of("principal", requestingUser, "progresses", listsProgresses));
     }
 
     @GetMapping("/new")
@@ -71,8 +70,8 @@ public class TaskListController {
     @GetMapping("/{id}")
     public ModelAndView read(@PathVariable Long id) throws ResponseStatusException {
         TaskList taskList = taskListService.read(id);
-        var progresses = new ArrayList<String>();
-        taskList.getChilds().forEach((sublist)->progresses.add(taskListService.getProgress(sublist)));
+        var progresses = new ArrayList<Boolean>();
+        taskList.getChilds().forEach((sublist)->progresses.add(taskListService.isFinished(sublist)));
 
         TaskListReadDTO data = new TaskListReadDTO(taskList.getId(), taskList.getTitle(), taskList.getDescription(), taskList.getOwner().getUsername(), taskList.isPublic(), taskList.getDeadline(), taskList.getCreatedAt(), taskListService.getProgress(taskList), linkService.getFromTaskList(taskList), taskList.getChilds(), progresses);
         return new ModelAndView("tasklist/read", Map.of("tasklist", data));

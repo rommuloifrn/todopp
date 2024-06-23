@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{main}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lists - todo++</title>
+</head>
+<body>
+    
+        <a th:href="@{'/'}">home</a>
+        
+        <main  layout:fragment="content">
+            <div th:replace="mainheader :: mainheader"></div>
+            <div class="hero">
+                <div id="tasklists">
+                    <a th:each="list, stats:${principal.taskLists}" th:href="@{/lists/{id}(id=${list.id})}">
+                        <div class="tasklist">
+                            
+                                <div th:text="${list.title}"></div>
+                                <div th:text="${progresses[stats.index]}"></div>
+                            
+                            <!--
+                                <a th:href="@{lists/delete/{id}(id=${list.id})}"> delete</a>
+                                <a th:href="@{lists/edit/{id}(id=${list.id})}">edit</a>
+                            -->
+                        </div>
+                    </a>
+                    
+                    <a th:href="@{'/lists/new'}"
+                    class="add-new"> 
+                        <div class="flex justify-center items-center">
+                            <svg class="h-8 transition pr-1 
+                            group-hover:fill-handle-h fill-floor
+                            dark:fill-speech-dark dark:group-hover:fill-speech-dark-hover" fill="#eDeDed" viewBox="0 -960 960 960"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg> Add&nbspnew
+                        </div>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </main>
+        
+    
+    
+    
+</body>
+</html>
