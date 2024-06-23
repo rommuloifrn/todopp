@@ -6,12 +6,15 @@ Make to-do lists that share tasks, track your progress in long and short-term go
 
 This project is a Spring Boot MVC application, that currently uses H2 Database for storing data.
 
-
-## Current goals
+## Goals
 
 - [X] TaskList & Task CRUDs
 - [X] Task sharing between lists
 - [X] User authentication/authorization
 - [X] Tasklist composition
-- [ ] Styling with Tailwindcss
+- [X] Styling with Tailwindcss
+- [ ] List expiration
 - [ ] Tasklist invite & participation
+
+- [ ] Random string ID generation
+- [ ] External database
