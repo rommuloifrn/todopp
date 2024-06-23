@@ -1,27 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - todo++</title>
-    <link th:href="@{/css/main.css}" rel="stylesheet" />
-</head>
-<body class="floor flex justify-center items-center h-[100vh]">
-    <main class="auth-main">
-        <div class="auth-main-title">
-            Login
-        </div>
+<h1>Login</h1>
 
-        <form th:action="@{'/auth/login'}" method="post">
-            <p th:if="${loginError}" class="error">Wrong user or password</p>
-            <label><p hidden>Username</p>
-                <input type="text" name="username" id="" autofocus placeholder="username" class="input mb-3">
-            </label> <br>
-            <label><p hidden>Password</p>
-                <input type="password" name="password" id="" placeholder="password" class="input">
-            </label>
-            <input type="submit" value="Login" class="whole-button">
-        </form>
-    </main>
-</body>
-</html>
+<form th:action="@{'/auth/login'}" method="post">
+    <p th:if="${loginError}" class="error">Wrong user or password</p>
+    <label>Username
+        <input type="text" name="username" id="" autofocus>
+    </label> <br>
+    <label>Password
+        <input type="password" name="password" id="">
+    </label>
+    <input type="submit" value="Login">
+</form>

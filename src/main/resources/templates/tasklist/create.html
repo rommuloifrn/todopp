@@ -1,36 +1,16 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{main}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New list - todo++</title>
-</head>
-<body>
-    <main layout:fragment="content" class="element-panel">
-        <div class="auth-main-title mb-5">
-            <th:block th:unless="${tasklist.id}">
-                New list
-            </th:block>
-            <th:block th:if="${tasklist.id}">
-                Editing <span th:text="${tasklist.title}"></span>
-            </th:block>
-        </div>
+<form method="post" th:action="@{'/lists/new'}" th:object="${tasklist}">
+    <input th:field="*{id}" type="number" hidden>
 
-        <form method="post" th:action="@{'/lists/new'}" th:object="${tasklist}">
-            <input th:field="*{id}" type="number" hidden>
-        
-            <div>
-                <label for="title">Title</label> <br>
-                <input th:field="*{title}" id="title" type="text" name="title" class="input p-1">
-            </div>
-            <div>
-                <label for="description">Description</label> <br>
-                <textarea th:field="*{description}" name="description" id="" cols="30" rows="10" class="input rounded outline-none p-1 h-40"></textarea>
-            </div>
-            
-            <input type="submit" value="Save" class="button">
-            
-        </form>
-    </main>
-</body>
-</html>
+    <div>
+        <p th:if="${tasklist.id}">Editing <span th:text="${tasklist.title}"></span></p> 
+        <label for="title">Title</label> <br>
+        <input th:field="*{title}" id="title" type="text" name="title">
+    </div>
+    <div>
+        <label for="description">Description</label> <br>
+        <textarea th:field="*{description}" name="description" id="" cols="30" rows="10"></textarea>
+    </div>
+    
+    <input type="submit" value="Save">
+    
+</form>

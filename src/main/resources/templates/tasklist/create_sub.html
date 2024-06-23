@@ -1,38 +1,21 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{main}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New sublist in "<th:block th:text="${parent.title}"/>" - todo++</title>
-</head>
-<body>
-    <main layout:fragment="content" class="element-panel">
-        <div class="auth-main-title text-2xl mb-5">
-            <th:block th:unless="${tasklist.id}">
-                New sublist in "<th:block th:text="${parent.title}"/>"
-            </th:block>
-            <th:block th:if="${tasklist.id}">
-                Editing <span th:text="${tasklist.title}"></span>
-            </th:block>
-        </div>
-        <form method="post" th:action="@{/lists/new-sublist-on/{parentId}(parentId=${parent.id})}" th:object="${tasklist}">
-            
-            <div>
-                <p th:if="${tasklist.id}">Editing <span th:text="${tasklist.title}"></span></p> 
-                <label for="title">Title</label> <br>
-                <input th:field="*{title}" id="title" type="text" name="title" class="input dark:bg-element-dark-hover p-1">
-            </div>
-        
-            <!--<input th:field="*{id}" type="number" hidden>  pra poder enviar direto o objeto (no editar lista) -->
-        
-            <div>
-                <label for="description">Description</label> <br>
-                <textarea th:field="*{description}" name="description" id="" cols="30" rows="10" class="dark:bg-element-dark-hover input rounded outline-none p-1 h-40"></textarea>
-            </div>
-            
-            <input type="submit" value="Save" class="button">
-            
-        </form>
-    </main>
-</body>
-</html>
+<form method="post" th:action="@{/lists/new-sublist-on/{parentId}(parentId=${parent.id})}" th:object="${tasklist}">
+    <div>
+        Creating a sublist in <span th:text="${parent.title}"></span>
+    </div>
+
+    <div>
+        <p th:if="${tasklist.id}">Editing <span th:text="${tasklist.title}"></span></p> 
+        <label for="title">Title</label> <br>
+        <input th:field="*{title}" id="title" type="text" name="title">
+    </div>
+
+    <!--<input th:field="*{id}" type="number" hidden>  pra poder enviar direto o objeto (no editar lista) -->
+
+    <div>
+        <label for="description">Description</label> <br>
+        <textarea th:field="*{description}" name="description" id="" cols="30" rows="10"></textarea>
+    </div>
+    
+    <input type="submit" value="Save">
+    
+</form>

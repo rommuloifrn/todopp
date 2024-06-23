@@ -1,6 +1,6 @@
 package com.romm.todopp.security;
 
-import static org.springframework.security.config.Customizer.*;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,21 +22,18 @@ public class SecurityConfigurations {
         .requestMatchers("/auth/**").permitAll()
         .requestMatchers("/h2-console/**").permitAll()
         .requestMatchers("/h2-database/**").permitAll()
-        .requestMatchers("/css/**").permitAll()
         
         .anyRequest().authenticated()
         )
         .formLogin(formLogin -> formLogin
             .loginPage("/auth/login")
             .loginProcessingUrl("/auth/login")
-            .successForwardUrl("/lists")
             .failureUrl("/auth/login-error")
-            .defaultSuccessUrl("/lists")
             //.failureForwardUrl(null)
         )
         .logout(
             logout -> logout.logoutUrl("/auth/logout")
-            .logoutSuccessUrl("/auth/logout")
+            .logoutSuccessUrl("/")
             
         )
         
