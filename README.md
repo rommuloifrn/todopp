@@ -14,6 +14,7 @@ This project is a Spring Boot MVC application, that currently uses H2 Database f
 - [X] Tasklist composition
 - [X] Styling with Tailwindcss
 - [ ] List expiration
+- [ ] Basic account management (profile page, change password...)
 - [ ] Tasklist invite & participation
 
 - [ ] Random string ID generation
