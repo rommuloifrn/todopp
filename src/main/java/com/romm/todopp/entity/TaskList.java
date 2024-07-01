@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.romm.todopp.security.Ownable;
 
 import jakarta.annotation.Nonnull;
@@ -37,6 +39,7 @@ public class TaskList extends Ownable {
 
     private String description;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deadline;
 
     // @OneToMany(mappedBy = "taskList", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)

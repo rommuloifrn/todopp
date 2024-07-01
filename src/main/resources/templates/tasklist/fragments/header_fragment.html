@@ -18,6 +18,8 @@
 
     <div id="list-basic-info">
         <span th:text="${'Created in '} + ${#dates.dayOfWeekName(tasklist.createdAt)} + ${#dates.format(tasklist.createdAt, ', MMM dd, yyyy')}" class="text-xs text-handle dark:text-handle-dark"></span>
+        <br>
+        <span th:text="${'deadline: '} + ${#dates.dayOfWeekName(tasklist.deadline)} + ${#dates.format(tasklist.deadline, ', MMM dd, yyyy')}" class="text-xs text-handle dark:text-handle-dark"></span>
         <p th:text="${tasklist.description}" class="description"></p>
     </div>
 </header>
