@@ -35,10 +35,12 @@
                         </div>
                     </a>
 
-                    <div onclick="toggleById('ximbaleleuson')">expired ones</div>
+                    <div onclick="toggleById('ximbaleleuson')" class="simple-handle-fading-link mb-5 text-xl">
+                        view expired lists
+                    </div>
                     <div id="ximbaleleuson" hidden>
                         <a th:each="list, stats:${principal.taskLists}" th:href="@{/lists/{id}(id=${list.id})}" th:unless="${list.deadline == null or list.deadline.after(#dates.createNow())}">
-                            <div class="tasklist">
+                            <div class="expired-tasklist">
                                 
                                     <div th:text="${list.title}"></div>
                                     <div th:text="${progresses[stats.index]}"></div>

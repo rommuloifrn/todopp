@@ -449,6 +449,7 @@ video {
 .link {
   width: -moz-max-content;
   width: max-content;
+  cursor: pointer;
 }
 
 .floor {
@@ -644,6 +645,69 @@ video {
   .tasklist:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(8 8 8 / var(--tw-bg-opacity));
+  }
+}
+
+.expired-tasklist {
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 243 243 / var(--tw-bg-opacity));
+  padding: .25em;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.expired-tasklist:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(231 231 231 / var(--tw-bg-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  .expired-tasklist {
+    --tw-bg-opacity: 1;
+    background-color: rgb(16 16 16 / var(--tw-bg-opacity));
+  }
+
+  .expired-tasklist:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(8 8 8 / var(--tw-bg-opacity));
+  }
+}
+
+.expired-tasklist {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 37 37 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(130 130 130 / var(--tw-text-opacity));
+}
+
+.expired-tasklist:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(78 78 78 / var(--tw-bg-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  .expired-tasklist {
+    --tw-bg-opacity: 1;
+    background-color: rgb(237 237 237 / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(86 86 86 / var(--tw-text-opacity));
+  }
+
+  .expired-tasklist:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(181 181 181 / var(--tw-bg-opacity));
   }
 }
 
@@ -971,6 +1035,7 @@ video {
 .simple-speech-fading-link {
   width: -moz-max-content;
   width: max-content;
+  cursor: pointer;
   --tw-text-opacity: 1;
   color: rgb(37 37 37 / var(--tw-text-opacity));
 }
@@ -995,6 +1060,7 @@ video {
 .simple-handle-fading-link {
   width: -moz-max-content;
   width: max-content;
+  cursor: pointer;
   --tw-text-opacity: 1;
   color: rgb(130 130 130 / var(--tw-text-opacity));
 }
