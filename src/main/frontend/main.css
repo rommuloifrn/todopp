@@ -15,6 +15,13 @@
         dark:bg-element-dark dark:hover:bg-element-dark-hover;
     }
 
+    .expired-tasklist {
+        @apply tasklist 
+        bg-speech hover:bg-speech-h text-handle
+        dark:bg-speech-dark dark:hover:bg-speech-dark-hover dark:text-handle-dark
+        ;
+    }
+
     .description {
         @apply 
         text-speech-h
@@ -107,7 +114,7 @@
 @layer base {
 
     .link {
-        @apply w-max;
+        @apply w-max cursor-pointer;
     }
 
     .floor {
