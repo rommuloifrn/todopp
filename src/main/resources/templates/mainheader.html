@@ -5,6 +5,6 @@
         lists
     </a>
     <div class="text-2xl font-semibold">
-        &#64<span th:text="${#authentication?.principal.username}"></span>
+        &#64<a th:text="${#authentication?.principal.username}" th:href="@{/account}" class="simple-link"></a>
     </div>
 </div>
